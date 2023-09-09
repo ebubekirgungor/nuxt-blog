@@ -10,11 +10,13 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@types/bcrypt": "^5.0.0",
     "@types/node": "^18.17.3",
+    "mongoose": "^7.5.0",
+    "mongoose-bcrypt": "^1.10.1",
     "nuxt": "^3.6.5"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.8.0",
-    "vue-router": "^4.2.4"
+    "bcrypt": "^5.1.1"
   }
 }
