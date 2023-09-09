@@ -6,7 +6,6 @@ interface IRequestBody {
 export default defineEventHandler(async (event) => {
   console.log("POST /api/users/signin");
   const { email, password } = await readBody<IRequestBody>(event);
-  // Check if email is passed.
   if (!email) {
     event.res.statusCode = 400;
     return {
@@ -14,7 +13,6 @@ export default defineEventHandler(async (event) => {
       message: "Body malformed: email is required.",
     };
   }
-  // Check if password is passed.
   if (!password) {
     event.res.statusCode = 400;
     return {
@@ -31,7 +29,6 @@ export default defineEventHandler(async (event) => {
       console.log("User found");
       const isPasswordValid = await userData.verifyPasswordSync(password);
       if (isPasswordValid) {
-        // Generate token or create session here
         return {
           id: userData._id,
           name: userData.name,

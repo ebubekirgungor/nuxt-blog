@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
     event.res.statusCode = 500;
     return {
       code: "ERROR",
-      message: "Something wrong.",
+      message: "Error",
     };
   }
 });
