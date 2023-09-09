@@ -1,4 +1,4 @@
-import { users } from "../../models";
+import users from "../../models/user";
 interface IRequestBody {
   email: string;
   password: string;

@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 const schema = new mongoose.Schema(
   {
-    description: { type: String, unique: true },
-    post: String,
+    name: { type: String, unique: true },
+    author: String,
+    title: String,
+    content: String,
   },
   { timestamps: true, strict: true, strictQuery: true }
 );

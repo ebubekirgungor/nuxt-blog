@@ -1,4 +1,4 @@
-import { users } from "../../models";
+import users from "../../models/user";
 export default defineEventHandler(async (event) => {
   console.log("GET /api/users");
   try {

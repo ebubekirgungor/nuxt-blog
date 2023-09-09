@@ -1,4 +1,4 @@
-import { users } from "../../models";
+import users from "../../models/user";
 export default defineEventHandler(async (event) => {
   const userId = getRouterParam(event, "id");
   console.log(`GET /api/users/${userId}`);
