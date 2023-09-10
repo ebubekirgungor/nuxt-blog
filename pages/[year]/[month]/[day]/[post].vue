@@ -1,14 +1,20 @@
-<script setup>
+<script setup lang="ts">
 const route = useRoute();
 
-const { data: post, error } = await useAsyncData("post", () =>
-  $fetch(`/api/posts/` + route.params.post + "?type=post", {
-    method: "GET",
-  })
+interface Post {
+  title: string;
+  content: string;
+}
+
+//console.log(route.path);
+const date = route.path.split('/');
+
+const { data: post } = await useFetch<Post>(
+  `/api/posts/${route.params.post}?type=post&date=${date[1]}-${date[2]}-${date[3]}`
 );
 </script>
 <template>
-  <h1 class="text-3xl font-bold underline">{{ post.title }}</h1>
-  <p>{{ post.content }}</p>
+  <h1 class="text-3xl font-bold underline">{{ post!.title }}</h1>
+  <p>{{ post!.content }}</p>
   <NuxtLink to="/">Home</NuxtLink>
 </template>

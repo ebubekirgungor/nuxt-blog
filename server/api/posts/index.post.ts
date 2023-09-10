@@ -8,7 +8,9 @@ interface IRequestBody {
 }
 export default defineEventHandler(async (event) => {
   console.log("POST /api/posts");
-  const { name, author, title, content, page } = await readBody<IRequestBody>(event);
+  const { name, author, title, content, page } = await readBody<IRequestBody>(
+    event
+  );
   try {
     const postData = await posts.findOne({
       name,
