@@ -10,6 +10,11 @@ export default defineEventHandler(async (event) => {
       title: post.title,
       content: post.content,
       page: post.page,
+      publishDate: {
+        d: post.createdAt.getDate(),
+        m: post.createdAt.getMonth() + 1,
+        y: post.createdAt.getFullYear(),
+      }
     }));
   } catch (err) {
     console.dir(err);
