@@ -12,9 +12,12 @@
     "@nuxt/devtools": "latest",
     "@types/bcrypt": "^5.0.0",
     "@types/node": "^18.17.3",
+    "autoprefixer": "^10.4.15",
     "mongoose": "^7.5.0",
     "mongoose-bcrypt": "^1.10.1",
-    "nuxt": "^3.6.5"
+    "nuxt": "^3.6.5",
+    "postcss": "^8.4.29",
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
     "axios": "^1.5.0",

@@ -6,4 +6,11 @@ export default defineNuxtConfig({
   nitro: {
     plugins: ["~/server/index.ts"],
   },
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+  css: ['~/assets/css/main.css'],
 })

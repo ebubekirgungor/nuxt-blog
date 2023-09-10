@@ -1,11 +1,14 @@
 import posts from "../../models/post";
 export default defineEventHandler(async (event) => {
-  const postName = getRouterParam(event, "name");
+  const postName = getRouterParam(event, "page");
+  const {type} = getQuery(event);
+  const isPage = type == "page";
   console.log(`GET /api/posts/${postName}`);
   try {
     console.log("Find post");
     const postData = await posts.findOne({
       "name": postName,
+      "page": isPage,
     });
     if (postData) {
       return {

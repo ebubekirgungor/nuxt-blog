@@ -5,6 +5,7 @@ const schema = new mongoose.Schema(
     author: String,
     title: String,
     content: String,
+    page: Boolean,
   },
   { timestamps: true, strict: true, strictQuery: true }
 );

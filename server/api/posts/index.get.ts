@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
       name: post.name,
       title: post.title,
       content: post.content,
+      page: post.page,
     }));
   } catch (err) {
     console.dir(err);
