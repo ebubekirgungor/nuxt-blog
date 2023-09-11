@@ -4,18 +4,18 @@ export default defineEventHandler(async (event) => {
   const { type, date } = getQuery(event);
   const isPage = type == "page";
   console.log(`GET /api/posts/${postName}`);
-  const start = new Date(date);
-  start.setHours(0, 0, 0, 0);
-  const end = new Date(date);
-  end.setHours(23, 59, 59, 999);
   try {
     console.log("Find post");
     const query = {
       name: postName,
       page: isPage,
     };
-    
+
     if (!isPage) {
+      const start = new Date(date);
+      start.setHours(0, 0, 0, 0);
+      const end = new Date(date);
+      end.setHours(23, 59, 59, 999);
       query.createdAt = {
         $gte: start,
         $lte: end,

@@ -6,7 +6,6 @@ interface Post {
   content: string;
 }
 
-//console.log(route.path);
 const date = route.path.split('/');
 
 const { data: post } = await useFetch<Post>(

@@ -12,5 +12,6 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  css: ['~/assets/css/main.css'],
-})
+  modules: ["@sidebase/nuxt-auth"],
+  css: ["~/assets/css/main.css"],
+});
