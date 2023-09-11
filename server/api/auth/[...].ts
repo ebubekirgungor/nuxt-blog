@@ -1,20 +1,18 @@
-import CredentialsProvider from "next-auth/providers/credentials";
+/*import CredentialsProvider from "next-auth/providers/credentials";
 import { NuxtAuthHandler } from "#auth";
 
 export default NuxtAuthHandler({
-  secret: process.env.NUXT_SECRET,
+  secret: process.env.SECRET,
   providers: [
     CredentialsProvider.default({
       credentials: {
         username: {
           label: "Username",
           type: "text",
-          placeholder: "(hint: jsmith)",
         },
         password: {
           label: "Password",
           type: "password",
-          placeholder: "(hint: hunter2)",
         },
       },
       authorize(credentials: any) {
@@ -41,3 +39,4 @@ export default NuxtAuthHandler({
     }),
   ],
 });
+*/
