@@ -1,36 +1,35 @@
-/*import CredentialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { NuxtAuthHandler } from "#auth";
+import users from "../../models/user";
 
 export default NuxtAuthHandler({
-  secret: process.env.SECRET,
+  secret: useRuntimeConfig().authSecret,
+  pages: {
+    signIn: "/login",
+  },
   providers: [
     CredentialsProvider.default({
-      credentials: {
-        username: {
-          label: "Username",
-          type: "text",
-        },
-        password: {
-          label: "Password",
-          type: "password",
-        },
-      },
-      authorize(credentials: any) {
-        const user = {
-          id: "1",
-          name: "J Smith",
-          username: "jsmith",
-          password: "hunter2",
-          image: "https://avatars.githubusercontent.com/u/25911230?v=4",
-        };
+      async authorize(credentials: any) {
+        const userData = await users.findOne({
+          email: credentials?.email,
+        });
 
-        if (
-          credentials?.username === user.username &&
-          credentials?.password === user.password
-        ) {
-          return user;
+        if (!userData) {
+          console.log(
+            "User not found"
+          );
+          return false;
+        }
+
+        const isPasswordValid = await userData.comparePassword(
+          credentials?.password
+        );
+
+        if (isPasswordValid) {
+          console.log("ok");
+          return userData;
         } else {
-          console.error(
+          console.log(
             "Warning: Malicious login attempt registered, bad credentials provided"
           );
           return null;
@@ -39,4 +38,3 @@ export default NuxtAuthHandler({
     }),
   ],
 });
-*/

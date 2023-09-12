@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
     });
     if (userData) {
       console.log("User found");
-      const isPasswordValid = await userData.verifyPasswordSync(password);
+      const isPasswordValid = await userData.methods.comparePassword(password);
       if (isPasswordValid) {
         return {
           id: userData._id,

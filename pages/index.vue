@@ -21,24 +21,28 @@ var posts: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
 });
 </script>
 <template>
-  <h1>Pages:</h1>
-  <div v-for="page in pages">
-    <NuxtLink :to="page.name">{{ page.title }}</NuxtLink>
-  </div>
-
-  <h1>Posts:</h1>
-  <div v-for="post in posts">
-    <NuxtLink
-      :to="
-        post.publishDate.y +
-        '/' +
-        post.publishDate.m +
-        '/' +
-        post.publishDate.d +
-        '/' +
-        post.name
-      "
-      >{{ post.title }}</NuxtLink
-    >
-  </div>
+  <main class="h-screen bg-emerald-50">
+    <div class="flex pt-[3%] pl-[20%] pr-[20%]">
+      <div class="grow flex items-center">
+        <NuxtLink to="/">Home</NuxtLink>
+      </div>
+      <div class="p-5" v-for="page in pages">
+        <NuxtLink :to="page.name">{{ page.title }}</NuxtLink>
+      </div>
+    </div>
+    <div v-for="post in posts">
+      <NuxtLink
+        :to="
+          post.publishDate.y +
+          '/' +
+          post.publishDate.m +
+          '/' +
+          post.publishDate.d +
+          '/' +
+          post.name
+        "
+        >{{ post.title }}</NuxtLink
+      >
+    </div>
+  </main>
 </template>

@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     mongoUrl: process.env.MONGO_URL,
+    authSecret: process.env.SECRET,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
@@ -12,6 +13,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  //modules: ["@sidebase/nuxt-auth"],
+  modules: ["@sidebase/nuxt-auth"],
+  auth: {
+    origin: 'http://localhost:3000',
+  },
   css: ["~/assets/css/main.css"],
 });
