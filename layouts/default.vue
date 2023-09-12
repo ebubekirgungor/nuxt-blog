@@ -13,12 +13,16 @@ var pages: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
 }) {
   return item.page === true;
 });
+
+const main = ref('h-screen bg-emerald-50');
+const flex = ref('flex pt-[3%] pl-[20%] pr-[20%]');
+const flex_center = ref('grow flex items-center');
 </script>
 
 <template>
-  <main class="h-screen bg-emerald-50">
-    <div class="flex pt-[3%] pl-[20%] pr-[20%]">
-      <div class="grow flex items-center">
+  <main :class="main">
+    <div :class="flex">
+      <div :class="flex_center">
         <NuxtLink to="/">Home</NuxtLink>
       </div>
       <div class="p-5" v-for="page in pages">
