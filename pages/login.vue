@@ -51,7 +51,11 @@
               <button
                 type="button"
                 @click="
-                  signIn('credentials', { email: email, password: password })
+                  signIn('credentials', {
+                    email: email,
+                    password: password,
+                    callbackUrl: '/',
+                  })
                 "
                 class="transition duration-200 ease-in-out px-5 py-2 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
               >
@@ -70,8 +74,8 @@ const password = ref("");
 definePageMeta({
   auth: {
     unauthenticatedOnly: true,
-    navigateAuthenticatedTo: "/page",
   },
+  layout: 'login'
 });
 const { signIn } = useAuth();
 </script>

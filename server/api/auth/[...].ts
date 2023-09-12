@@ -15,9 +15,7 @@ export default NuxtAuthHandler({
         });
 
         if (!userData) {
-          console.log(
-            "User not found"
-          );
+          console.log("User not found");
           return false;
         }
 

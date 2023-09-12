@@ -6,7 +6,7 @@ interface Post {
   content: string;
 }
 
-const date = route.path.split('/');
+const date = route.path.split("/");
 
 const { data: post } = await useFetch<Post>(
   `/api/posts/${route.params.post}?type=post&date=${date[1]}-${date[2]}-${date[3]}`
