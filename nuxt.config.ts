@@ -15,7 +15,9 @@ export default defineNuxtConfig({
   },
   modules: ["@sidebase/nuxt-auth"],
   auth: {
-    origin: 'http://localhost:3000',
+    origin: "http://localhost:3000",
   },
-  css: ["~/assets/css/main.css"],
+  css: [
+    "~/assets/css/main.css",
+  ],
 });

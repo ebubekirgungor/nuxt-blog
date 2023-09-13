@@ -9,7 +9,7 @@
               signIn('credentials', {
                 email: email,
                 password: password,
-                callbackUrl: '/',
+                callbackUrl: '/admin',
               })
             "
             :class="form"
