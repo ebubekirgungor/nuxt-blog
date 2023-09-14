@@ -14,7 +14,7 @@ useHead({
   title: page.value!.title,
 });
 
-const flex = ref('flex flex-col mt-14 ml-[32%]');
+const flex = ref('flex flex-col mt-14 ml-[10%] md:ml-[32%]');
 const title = ref('text-[50px]');
 const content = ref('mt-14 text-[17px]');
 </script>

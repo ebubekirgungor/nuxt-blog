@@ -25,8 +25,8 @@ const setActiveLink = (link: string) => {
     <nav :class="nav">
       <div class="mx-auto px-2 sm:px-6 lg:px-3">
         <div class="relative flex h-10 items-center justify-between">
-          <div class="grow flex items-center">
-            <h1 class="text-white">Test</h1>
+          <div class="grow flex items-center ml-4">
+            <NuxtLink class="text-white" to="/">Home</NuxtLink>
           </div>
           <div>
             <div
