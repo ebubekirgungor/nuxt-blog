@@ -29,7 +29,7 @@ var posts: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
 </script>
 <template>
   <div
-    class="flex flex-col justify-between text-2xl bg-white min-w-[300px] min-h-[175px] rounded-xl shadow-xl p-8 select-none"
+    class="scale-75 md:scale-100 flex flex-col justify-between text-2xl bg-white min-w-[300px] min-h-[175px] rounded-xl shadow-xl p-8 select-none"
   >
     <div class="flex justify-between">
       <span>Pages:</span>
