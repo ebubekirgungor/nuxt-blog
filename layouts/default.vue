@@ -26,7 +26,7 @@ const flex_center = ref('grow flex items-center');
         <NuxtLink to="/">Home</NuxtLink>
       </div>
       <div class="p-5" v-for="page in pages">
-        <NuxtLink :to="page.name">{{ page.title }}</NuxtLink>
+        <NuxtLink :to="'/' + page.name">{{ page.title }}</NuxtLink>
       </div>
     </div>
     <div>

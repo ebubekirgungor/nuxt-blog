@@ -17,7 +17,9 @@ useHead({
 });
 </script>
 <template>
-  <h1 class="text-3xl font-bold underline">{{ post!.title }}</h1>
-  <p>{{ post!.content }}</p>
-  <NuxtLink to="/">Home</NuxtLink>
+  <div>
+    <h1 class="text-3xl font-bold underline">{{ post!.title }}</h1>
+    <p>{{ post!.content }}</p>
+    <NuxtLink to="/">Home</NuxtLink>
+  </div>
 </template>

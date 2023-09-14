@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Blog'
+  title: "Blog",
 });
 
 interface Data {
@@ -19,18 +19,20 @@ var posts: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
 });
 </script>
 <template>
-  <div v-for="post in posts">
-    <NuxtLink
-      :to="
-        post.publishDate.y +
-        '/' +
-        post.publishDate.m +
-        '/' +
-        post.publishDate.d +
-        '/' +
-        post.name
-      "
-      >{{ post.title }}</NuxtLink
-    >
+  <div>
+    <div v-for="post in posts">
+      <NuxtLink
+        :to="
+          post.publishDate.y +
+          '/' +
+          post.publishDate.m +
+          '/' +
+          post.publishDate.d +
+          '/' +
+          post.name
+        "
+        >{{ post.title }}</NuxtLink
+      >
+    </div>
   </div>
 </template>

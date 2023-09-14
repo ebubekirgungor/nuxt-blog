@@ -4,9 +4,9 @@ definePageMeta({
   middleware: "auth",
 });
 useHead({
-  title: "Users",
+  title: "Pages",
 });
 </script>
 <template>
-  <h1>users</h1>
+  <h1>pages</h1>
 </template>

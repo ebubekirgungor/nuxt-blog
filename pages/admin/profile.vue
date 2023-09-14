@@ -1,12 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "admin",
+  middleware: "auth",
 });
 useHead({
-  title: "Dashboard",
+  title: "Profile",
 });
 </script>
 <template>
+  <div>
     <h1>profile</h1>
     <br />
     <br />
@@ -88,4 +90,5 @@ useHead({
     <br />
     <br />
     <h1>profile</h1>
+  </div>
 </template>

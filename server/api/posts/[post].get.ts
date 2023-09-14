@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     };
 
     if (!isPage) {
-      const start = new Date(date);
+      const start = new Date(date: Date);
       start.setHours(0, 0, 0, 0);
       const end = new Date(date);
       end.setHours(23, 59, 59, 999);

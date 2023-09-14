@@ -1,11 +1,12 @@
 <script setup lang="ts">
 definePageMeta({
   layout: "admin",
+  middleware: "auth",
 });
 useHead({
-  title: "Dashboard",
+  title: "Posts",
 });
 </script>
 <template>
-    <h1>posts</h1>
+  <h1>posts</h1>
 </template>

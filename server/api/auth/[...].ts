@@ -7,6 +7,7 @@ export default NuxtAuthHandler({
   pages: {
     signIn: "/login",
   },
+  
   providers: [
     CredentialsProvider.default({
       async authorize(credentials: any) {
