@@ -17,10 +17,11 @@ export default defineNuxtConfig({
   auth: {
     origin: "http://localhost:3000",
   },
-  css: [
-    "~/assets/css/main.css",
-  ],
+  css: ["~/assets/css/main.css"],
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: "page", mode: "out-in" },
+  },
+  colorMode: {
+    preference: "light",
   },
 });

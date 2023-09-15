@@ -27,10 +27,7 @@ export default defineEventHandler(async (event) => {
         password,
         name,
       });
-      return {
-        id: newUserData._id,
-        username: newUserData.username,
-      };
+      return "User added";
     }
   } catch (err) {
     console.dir(err);

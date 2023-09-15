@@ -2,8 +2,6 @@
 interface Data {
   name: string;
   title: string;
-  content: string;
-  publishDate: { y: number; m: number; d: number };
 }
 
 const { data } = await useFetch("/api/posts");

@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
       id: post._id,
       name: post.name,
       title: post.title,
+      author: post.author,
       content: post.content,
       page: post.page,
       publishDate: {

@@ -6,7 +6,7 @@ const main = ref("bg-emerald-50");
 const nav = ref("bg-[#05211d] sticky w-full top-0");
 const flex = ref("flex");
 const sidebar = ref(
-  "w-64 bg-[#05211d] text-white p-4 h-[calc(100vh-40px)] sticky left-0 top-10"
+  "min-w-[16rem] bg-[#05211d] text-white p-4 h-[calc(100vh-40px)] sticky left-0 top-10"
 );
 const link = ref(
   "transition duration-300 ease-in-out hover:scale-105 flex select-none hover:bg-[#fff]/10 rounded-md p-3"
@@ -25,13 +25,13 @@ const setActiveLink = (link: string) => {
   <main :class="main">
     <nav :class="nav">
       <div class="mx-auto px-2 sm:px-6 lg:px-3">
-        <div class="relative flex h-10 items-center justify-between">
+        <div class="flex h-10 items-center justify-between">
           <div class="grow flex items-center ml-4">
             <NuxtLink class="text-white select-none" to="/">Home</NuxtLink>
           </div>
           <div>
             <div
-              class="relative min-w-[100px] h-[32px] group bg-white rounded-lg select-none"
+              class="min-w-[100px] h-[32px] group bg-white rounded-lg select-none"
             >
               <div class="flex justify-between md:cursor-pointer pt-1 pl-3">
                 <span>{{ data!.user!.name }}</span>
