@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
       console.log("User found");
       return {
         id: userData._id,
-        name: userData.name,
+        username: userData.username,
       };
     } else {
       console.log("User not found");

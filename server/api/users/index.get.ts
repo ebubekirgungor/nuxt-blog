@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const usersData = await users.find();
     return usersData.map((user) => ({
       id: user._id,
-      name: user.name,
+      username: user.username,
     }));
   } catch (err) {
     console.dir(err);

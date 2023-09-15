@@ -1,12 +1,13 @@
 import users from "../../models/user";
 interface IRequestBody {
+  username: string;
   email: string;
   password: string;
   name: string;
 }
 export default defineEventHandler(async (event) => {
   console.log("POST /api/users");
-  const { email, password, name } = await readBody<IRequestBody>(event);
+  const { username, email, password, name } = await readBody<IRequestBody>(event);
   try {
     const userData = await users.findOne({
       email,
@@ -21,13 +22,14 @@ export default defineEventHandler(async (event) => {
     } else {
       console.log("Create user");
       const newUserData = await users.create({
+        username,
         email,
         password,
         name,
       });
       return {
         id: newUserData._id,
-        name: newUserData.name,
+        username: newUserData.username,
       };
     }
   } catch (err) {

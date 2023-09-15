@@ -15,11 +15,14 @@ const { data: post } = await useFetch<Post>(
 useHead({
   title: post.value!.title,
 });
+
+const flex = ref('flex flex-col mt-14 ml-[10%] md:ml-[32%]');
+const title = ref('text-[50px]');
+const content = ref('mt-14 text-[17px]');
 </script>
 <template>
-  <div>
-    <h1 class="text-3xl font-bold underline">{{ post!.title }}</h1>
-    <p>{{ post!.content }}</p>
-    <NuxtLink to="/">Home</NuxtLink>
+  <div v-if="post" :class="flex">
+    <h1 :class="title">{{ post.title }}</h1>
+    <p :class="content">{{ post.content }}</p>
   </div>
 </template>

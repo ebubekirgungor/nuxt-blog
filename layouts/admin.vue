@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const { data, signOut } = useAuth();
+//console.log(data!.value!.username);
 const main = ref("bg-emerald-50");
 const nav = ref("bg-[#05211d] sticky w-full top-0");
 const flex = ref("flex");
@@ -26,14 +27,14 @@ const setActiveLink = (link: string) => {
       <div class="mx-auto px-2 sm:px-6 lg:px-3">
         <div class="relative flex h-10 items-center justify-between">
           <div class="grow flex items-center ml-4">
-            <NuxtLink class="text-white" to="/">Home</NuxtLink>
+            <NuxtLink class="text-white select-none" to="/">Home</NuxtLink>
           </div>
           <div>
             <div
-              class="relative w-[100px] h-[32px] group bg-white rounded-lg select-none"
+              class="relative min-w-[100px] h-[32px] group bg-white rounded-lg select-none"
             >
               <div class="flex justify-between md:cursor-pointer pt-1 pl-3">
-                <span>{{ data!.user!.email }}</span>
+                <span>{{ data!.user!.name }}</span>
                 <svg
                   class="w-2.5 h-2.5 mr-2 mt-2"
                   aria-hidden="true"

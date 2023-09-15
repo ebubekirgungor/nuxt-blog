@@ -1,37 +1,45 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-export interface user extends mongoose.Document {
-  email: String;
-  password: String;
-  name: String;
+export interface UserDocument extends mongoose.Document {
+  username: string;
+  email: string;
+  password: string;
+  name: string;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-const schema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
+    username: { type: String, unique: true },
     email: { type: String, unique: true },
-    password: { type: String, bcrypt: true },
+    password: { type: String },
     name: String,
   },
   { timestamps: true, strict: true, strictQuery: true }
 );
 
-schema.methods.comparePassword = function (
+userSchema.pre<UserDocument>("save", async function (next) {
+  if (!this.isModified("password")) return next();
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+    return next();
+  } catch (error) {
+    throw(error);
+  }
+});
+
+userSchema.methods.comparePassword = async function (
   candidatePassword: string
 ): Promise<boolean> {
-  let password = this.password;
-  return new Promise((resolve, reject) => {
-    bcrypt.compare(
-      candidatePassword,
-      password,
-      (err: any, success: boolean | PromiseLike<boolean>) => {
-        if (err) return reject(err);
-        return resolve(success);
-      }
-    );
-  });
+  try {
+    return await bcrypt.compare(candidatePassword, this.password);
+  } catch (error) {
+    throw error;
+  }
 };
 
-//schema.plugin(bcrypt);
-export default mongoose.model<user>("User", schema, "users");
+export default mongoose.model<UserDocument>("User", userSchema, "users");
