@@ -51,7 +51,7 @@ const submitForm = async () => {
       toast.warning("Post with given name already exists");
       break;
     case "NOT_LOGGED_IN":
-      toast.error("Post not added - Please login");
+      toast.error("Post can't added - Please login");
       break;
     case "SUCCESS":
       toast.success("Post added");

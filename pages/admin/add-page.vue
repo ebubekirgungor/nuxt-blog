@@ -51,7 +51,7 @@ const submitForm = async () => {
       toast.warning("Page with given name already exists");
       break;
     case "NOT_LOGGED_IN":
-      toast.error("Page not added - Please login");
+      toast.error("Page can't added - Please login");
       break;
     case "SUCCESS":
       toast.success("Page added");

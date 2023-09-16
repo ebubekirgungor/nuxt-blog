@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
 
     const userDataWithPosts = await Promise.all(
       usersData.map(async (user) => {
-        const userPosts = await posts.find({ author: user.username });
+        const userPosts = await posts.find({ author: user.username, page: false });
         return {
           id: user._id,
           username: user.username,

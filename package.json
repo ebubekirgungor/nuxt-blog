@@ -18,6 +18,7 @@
     "mongoose": "^7.5.0",
     "mongoose-bcrypt": "^1.10.1",
     "nuxt": "^3.6.5",
+    "nuxt-icon": "^0.5.0",
     "postcss": "^8.4.29",
     "tailwindcss": "^3.3.3"
   },

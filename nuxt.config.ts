@@ -13,13 +13,14 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@sidebase/nuxt-auth"],
+  modules: ["@sidebase/nuxt-auth", "nuxt-icon"],
   auth: {
     origin: "http://localhost:3000",
   },
   css: ["~/assets/css/main.css"],
   app: {
     pageTransition: { name: "page", mode: "out-in" },
+    
   },
   colorMode: {
     preference: "light",

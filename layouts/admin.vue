@@ -74,7 +74,7 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === '/admin' ? active : '']"
               @click="setActiveLink('/admin')"
               to="/admin"
-              >Dashboard</NuxtLink
+              ><Icon class="mr-2" name="mdi:view-dashboard-outline" />Dashboard</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -82,7 +82,7 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === '/admin/pages' ? active : '']"
               @click="setActiveLink('/admin/pages')"
               to="/admin/pages"
-              >Pages</NuxtLink
+              ><Icon class="mr-2" name="mdi:text-box-multiple-outline" />Pages</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -90,7 +90,7 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === '/admin/posts' ? active : '']"
               @click="setActiveLink('/admin/posts')"
               to="/admin/posts"
-              >Posts</NuxtLink
+              ><Icon class="mr-2" name="mdi:pin-outline" />Posts</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -98,7 +98,7 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === '/admin/profile' ? active : '']"
               @click="setActiveLink('/admin/profile')"
               to="/admin/profile"
-              >Profile</NuxtLink
+              ><Icon class="mr-2" name="mdi:account-outline" />Profile</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -106,7 +106,7 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === '/admin/users' ? active : '']"
               @click="setActiveLink('/admin/users')"
               to="/admin/users"
-              >Users</NuxtLink
+              ><Icon class="mr-2" name="mdi:account-group-outline" />Users</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -114,7 +114,7 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === '/admin/settings' ? active : '']"
               @click="setActiveLink('/admin/settings')"
               to="/admin/settings"
-              >Settings</NuxtLink
+              ><Icon class="mr-2" name="mdi:cog-outline" />Settings</NuxtLink
             >
           </li>
         </ul>
