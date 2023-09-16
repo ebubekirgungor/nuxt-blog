@@ -6,23 +6,33 @@ export default defineEventHandler(async (event) => {
   console.log(`GET /api/posts/${postName}`);
   try {
     console.log("Find post");
-    const query = {
+    const pagequery = {
       name: postName,
       page: isPage,
-      createdAt: {}
     };
+
+    const postquery = {
+      name: postName,
+      page: isPage,
+      createdAt: {},
+    };
+
+    let postData;
 
     if (!isPage) {
       const start = new Date(date as Date);
       start.setHours(0, 0, 0, 0);
       const end = new Date(date as Date);
       end.setHours(23, 59, 59, 999);
-      query.createdAt = {
+      postquery.createdAt = {
         $gte: start,
         $lte: end,
       };
+      postData = await posts.findOne(postquery);
+    } else {
+      postData = await posts.findOne(pagequery);
     }
-    const postData = await posts.findOne(query);
+
     if (postData) {
       return {
         id: postData._id,

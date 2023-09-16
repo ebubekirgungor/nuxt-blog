@@ -7,19 +7,13 @@ useHead({
   title: "Pages",
 });
 
-interface Data {
+interface Page {
   name: string;
   title: string;
   author: string;
 }
 
-const { data } = await useFetch("/api/posts");
-
-var pages: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
-  page: boolean;
-}) {
-  return item.page === true;
-});
+const { data: pages } = await useFetch<Array<Page>>("/api/posts?type=page");
 </script>
 <template>
   <div>

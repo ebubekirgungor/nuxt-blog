@@ -68,7 +68,7 @@ const submitForm = async () => {
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
-          <label :class="label">Name:</label>
+          <label :class="label">Name (URL):</label>
           <input v-model="newPage.name" required :class="input" type="text" />
         </div>
         <div class="flex justify-between">

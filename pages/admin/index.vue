@@ -6,26 +6,13 @@ definePageMeta({
 useHead({
   title: "Dashboard",
 });
-interface Data {
-  name: string;
-  title: string;
-  content: string;
-  publishDate: { y: number; m: number; d: number };
+
+interface Count {
+  pages: number;
+  posts: number;
 }
 
-const { data } = await useFetch("/api/posts");
-
-var pages: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
-  page: boolean;
-}) {
-  return item.page === true;
-});
-
-var posts: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
-  page: boolean;
-}) {
-  return item.page === false;
-});
+const { data: count } = await useFetch<Count | any>("/api/posts?type=count");
 </script>
 <template>
   <div
@@ -33,11 +20,11 @@ var posts: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
   >
     <div class="flex justify-between">
       <span>Pages:</span>
-      <span>{{ pages.length }}</span>
+      <span>{{ count.pages }}</span>
     </div>
     <div class="flex justify-between">
       <span>Posts:</span>
-      <span>{{ posts.length }}</span>
+      <span>{{ count.posts }}</span>
     </div>
   </div>
 </template>
