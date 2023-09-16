@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const { data, signOut } = useAuth();
-//console.log(data!.value!.username);
+const { data: user } = await useFetch<string | any>("/api/users/" + data!.value!.user!.email);
 const main = ref("bg-emerald-50");
 const nav = ref("bg-[#05211d] sticky w-full top-0");
 const flex = ref("flex");
@@ -34,7 +34,7 @@ const setActiveLink = (link: string) => {
               class="min-w-[100px] h-[32px] group bg-white rounded-lg select-none"
             >
               <div class="flex justify-between md:cursor-pointer pt-1 pl-3">
-                <span>{{ data!.user!.name }}</span>
+                <span>{{ user!.username }}</span>
                 <svg
                   class="w-2.5 h-2.5 mr-2 mt-2"
                   aria-hidden="true"

@@ -1,16 +1,15 @@
 import users from "../../models/user";
 export default defineEventHandler(async (event) => {
-  const userId = getRouterParam(event, "id");
-  console.log(`GET /api/users/${userId}`);
+  const userEmail = getRouterParam(event, "email");
+  console.log(`GET /api/users/${userEmail}`);
   try {
     console.log("Find user");
     const userData = await users.findOne({
-      "_id": userId,
+      "email": userEmail,
     });
     if (userData) {
       console.log("User found");
       return {
-        id: userData._id,
         username: userData.username,
       };
     } else {
@@ -18,7 +17,7 @@ export default defineEventHandler(async (event) => {
       event.res.statusCode = 404;
       return {
         code: "USER_NOT_FOUND",
-        message: `User with id ${userId} doesn't exists.`,
+        message: `User with id ${userEmail} doesn't exists.`,
       };
     }
   } catch (err) {

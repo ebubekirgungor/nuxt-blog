@@ -9,12 +9,13 @@ export default defineEventHandler(async (event) => {
     const query = {
       name: postName,
       page: isPage,
+      createdAt: {}
     };
 
     if (!isPage) {
-      const start = new Date(date);
+      const start = new Date(date as Date);
       start.setHours(0, 0, 0, 0);
-      const end = new Date(date);
+      const end = new Date(date as Date);
       end.setHours(23, 59, 59, 999);
       query.createdAt = {
         $gte: start,

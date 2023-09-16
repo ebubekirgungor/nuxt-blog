@@ -7,14 +7,21 @@ useHead({
   title: "Users",
 });
 
-const { data: users } = await useFetch("/api/users");
+interface User {
+  username: string;
+  email: string;
+  name: string;
+  posts: number;
+}
+const { data: users } = await useFetch<Array<User>>("/api/users");
 </script>
 <template>
   <div>
     <div class="flex">
       <h1 class="text-2xl select-none pb-6">Users</h1>
       <NuxtLink
-        to="add-user" class="transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
+        to="add-user"
+        class="transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
       >
         Add
       </NuxtLink>

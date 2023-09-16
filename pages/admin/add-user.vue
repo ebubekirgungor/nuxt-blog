@@ -14,7 +14,7 @@ const input = ref(
 );
 const label = ref("select-none mt-1");
 const button = ref(
-  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
+  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
 );
 
 const newUser = ref({
@@ -35,7 +35,27 @@ const submitForm = async () => {
       password: newUser.value.password,
     },
   });
-  toast.success(responseData.value as string);
+  newUser.value = {
+    username: "",
+    email: "",
+    firstname: "",
+    lastname: "",
+    password: "",
+  };
+  switch (responseData.value) {
+    case "USER_EXISTS":
+      toast.warning("User with given email or username already exists");
+      break;
+    case "NOT_LOGGED_IN":
+      toast.error("User not added - Please login");
+      break;
+    case "SUCCESS":
+      toast.success("User added");
+      break;
+    case "ERROR":
+      toast.warning("Error");
+      break;
+  }
 };
 </script>
 <template>
@@ -45,11 +65,16 @@ const submitForm = async () => {
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
           <label :class="label">Username:</label>
-          <input v-model="newUser.username" :class="input" type="text" />
+          <input
+            v-model="newUser.username"
+            required
+            :class="input"
+            type="text"
+          />
         </div>
         <div class="flex justify-between">
           <label :class="label">Email:</label>
-          <input v-model="newUser.email" :class="input" type="text" />
+          <input v-model="newUser.email" required :class="input" type="text" />
         </div>
         <div class="flex justify-between">
           <label :class="label">First Name:</label>
@@ -61,7 +86,12 @@ const submitForm = async () => {
         </div>
         <div class="flex justify-between">
           <label :class="label">Password:</label>
-          <input v-model="newUser.password" :class="input" type="password" />
+          <input
+            v-model="newUser.password"
+            required
+            :class="input"
+            type="password"
+          />
         </div>
       </div>
       <button type="submit" :class="button">Add</button>

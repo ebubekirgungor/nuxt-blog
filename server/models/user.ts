@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+//@ts-ignore
 import bcrypt from "bcryptjs";
 
 export interface UserDocument extends mongoose.Document {

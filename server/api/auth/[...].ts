@@ -8,6 +8,7 @@ export default NuxtAuthHandler({
   },
 
   providers: [
+    //@ts-ignore
     CredentialsProvider.default({
       async authorize(credentials: any) {
         const userData =
