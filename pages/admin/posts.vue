@@ -25,11 +25,12 @@ var posts: Data[] = data["_rawValue" as keyof Object].filter(function (item: {
   <div>
     <div class="flex">
       <h1 class="text-2xl select-none pb-6">Posts</h1>
-      <button
-        class="transition duration-200 ease-in-out px-5 py-1 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
+      <NuxtLink
+        to="add-post"
+        class="transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
       >
         Add
-      </button>
+      </NuxtLink>
     </div>
     <table
       class="w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500"
