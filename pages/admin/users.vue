@@ -20,7 +20,7 @@ interface User {
 
 const { data } = useAuth();
 const { data: currentuser } = await useFetch<string | any>(
-  "/api/users/" + data!.value!.user!.id
+  "/api/users/" + (data!.value!.user as any).id
 );
 
 let users: User | any = ref({});
@@ -55,18 +55,9 @@ const deleteUser = async (id: string) => {
 const button = ref(
   "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
 );
+
+const activeLink = useActiveLink();
 </script>
-<style>
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: all 0.3s;
-}
-.modal-fade-enter-from,
-.modal-fade-leave-to {
-  transform: translateY(30px);
-  opacity: 0;
-}
-</style>
 <template>
   <div>
     <transition name="modal-fade" mode="out-in">
@@ -135,6 +126,7 @@ const button = ref(
           <td class="py-2 pr-4 text-black flex float-right">
             <NuxtLink
               :to="'edit-user?id=' + user.id"
+              @click="user.username == currentuser.username ? activeLink = 'profile' : activeLink = 'users'"
               class="transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
             >
               <Icon name="mdi:pencil-outline" />

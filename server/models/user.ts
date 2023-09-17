@@ -33,7 +33,7 @@ userSchema.pre<UserDocument>("save", async function (next) {
   }
 });
 
-userSchema.pre("updateOne", async function (next) {
+userSchema.pre<UserDocument | any>("updateOne", async function (next) {
   const data = this.getUpdate();
   if (!data) {
     return next();

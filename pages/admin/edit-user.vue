@@ -2,6 +2,19 @@
 import { useToast } from "vue-toastification";
 const toast = useToast();
 const route = useRoute();
+const { data } = useAuth();
+const activeLink = useActiveLink();
+
+if (
+  route.name == "admin-edit-user" &&
+  route.query.id == (data!.value!.user as any).id
+) {
+  activeLink.value = "profile";
+} else {
+  activeLink.value = "users";
+}
+
+const id = route.query.id;
 
 interface User {
   username: string;
@@ -13,12 +26,19 @@ const { data: user } = await useFetch<Array<User> | any>(
   "/api/users/" + route.query.id
 );
 
+watch(() => route.query.id, () => window.location.reload())
+
+let title: string;
+
+if ((data!.value!.user as any).id == route.query.id) title = "Profile";
+else title = "Edit User";
+
 definePageMeta({
   layout: "admin",
   middleware: "auth",
 });
 useHead({
-  title: "Edit User",
+  title: title,
 });
 const input = ref(
   "transition duration-200 ease-in-out ml-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:outline-none focus:ring-sky-400 focus:border-sky-400 block w-[250px] h-9 p-2.5"
@@ -37,15 +57,18 @@ const updatedUser = ref({
 });
 
 const submitForm = async () => {
-  const { data: responseData } = await useFetch("/api/users/" + route.query.id, {
-    method: "post",
-    body: {
-      username: updatedUser.value.username,
-      email: updatedUser.value.email,
-      name: updatedUser.value.firstname + " " + updatedUser.value.lastname,
-      password: updatedUser.value.password,
-    },
-  });
+  const { data: responseData } = await useFetch(
+    "/api/users/" + route.query.id,
+    {
+      method: "post",
+      body: {
+        username: updatedUser.value.username,
+        email: updatedUser.value.email,
+        name: updatedUser.value.firstname + " " + updatedUser.value.lastname,
+        password: updatedUser.value.password,
+      },
+    }
+  );
   updatedUser.value = {
     username: "",
     email: "",
@@ -69,7 +92,7 @@ const submitForm = async () => {
 </script>
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl select-none pb-6">Edit User</h1>
+    <h1 class="text-2xl select-none pb-6">{{ title }}</h1>
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
@@ -83,7 +106,12 @@ const submitForm = async () => {
         </div>
         <div class="flex justify-between">
           <label :class="label">Email:</label>
-          <input v-model="updatedUser.email" required :class="input" type="text" />
+          <input
+            v-model="updatedUser.email"
+            required
+            :class="input"
+            type="text"
+          />
         </div>
         <div class="flex justify-between">
           <label :class="label">First Name:</label>

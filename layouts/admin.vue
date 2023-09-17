@@ -1,7 +1,9 @@
 <script setup lang="ts">
 const route = useRoute();
 const { data, signOut } = useAuth();
-const { data: user } = await useFetch<string | any>("/api/users/" + data!.value!.user!.id);
+const { data: user } = await useFetch<string | any>(
+  "/api/users/" + (data!.value!.user as any).id
+);
 const main = ref("bg-emerald-50");
 const nav = ref("bg-[#05211d] sticky w-full top-0");
 const flex = ref("flex");
@@ -15,7 +17,9 @@ const active = ref("bg-[#055d49] pointer-events-none");
 const user_menu = ref(
   "flex flex-col justify-between transition-visibility duration-300 ease-in-out absolute w-[100px] h-[85px] invisible group-hover:visible opacity-0 group-hover:opacity-100 bg-white rounded-lg shadow-xl mt-0 group-hover:mt-3 p-3"
 );
-const activeLink = ref(route.path);
+
+const activeLink = useActiveLink();
+activeLink.value = route.name?.toString().replace("admin-", "") as string;
 
 const setActiveLink = (link: string) => {
   activeLink.value = link;
@@ -54,8 +58,8 @@ const setActiveLink = (link: string) => {
               <div :class="user_menu">
                 <div>
                   <NuxtLink
-                    @click="setActiveLink('/admin/profile')"
-                    to="/admin/profile"
+                    @click="setActiveLink('profile')"
+                    :to="'/admin/edit-user?id=' + user.id"
                     >Profile</NuxtLink
                   >
                 </div>
@@ -71,48 +75,58 @@ const setActiveLink = (link: string) => {
         <ul>
           <li class="pb-1">
             <NuxtLink
-              :class="[link, activeLink === '/admin' ? active : '']"
-              @click="setActiveLink('/admin')"
+              :class="[link, activeLink === 'admin' ? active : '']"
+              @click="setActiveLink('admin')"
               to="/admin"
-              ><Icon class="mr-2" name="mdi:view-dashboard-outline" />Dashboard</NuxtLink
+              ><Icon
+                class="mr-2"
+                name="mdi:view-dashboard-outline"
+              />Dashboard</NuxtLink
             >
           </li>
           <li class="pb-1">
             <NuxtLink
-              :class="[link, activeLink === '/admin/pages' ? active : '']"
-              @click="setActiveLink('/admin/pages')"
+              :class="[link, activeLink === 'pages' ? active : '']"
+              @click="setActiveLink('pages')"
               to="/admin/pages"
-              ><Icon class="mr-2" name="mdi:text-box-multiple-outline" />Pages</NuxtLink
+              ><Icon
+                class="mr-2"
+                name="mdi:text-box-multiple-outline"
+              />Pages</NuxtLink
             >
           </li>
           <li class="pb-1">
             <NuxtLink
-              :class="[link, activeLink === '/admin/posts' ? active : '']"
-              @click="setActiveLink('/admin/posts')"
+              :class="[link, activeLink === 'posts' ? active : '']"
+              @click="setActiveLink('posts')"
               to="/admin/posts"
               ><Icon class="mr-2" name="mdi:pin-outline" />Posts</NuxtLink
             >
           </li>
           <li class="pb-1">
             <NuxtLink
-              :class="[link, activeLink === '/admin/profile' ? active : '']"
-              @click="setActiveLink('/admin/profile')"
-              to="/admin/profile"
+              :class="[link, activeLink === 'users' ? active : '']"
+              @click="setActiveLink('users')"
+              to="/admin/users"
+              ><Icon
+                class="mr-2"
+                name="mdi:account-group-outline"
+              />Users</NuxtLink
+            >
+          </li>
+          <li class="pb-1">
+            <NuxtLink
+              :class="[link, activeLink === 'profile' ? active : '']"
+              @click="setActiveLink('profile')"
+              ref="profile"
+              :to="'/admin/edit-user?id=' + user.id"
               ><Icon class="mr-2" name="mdi:account-outline" />Profile</NuxtLink
             >
           </li>
           <li class="pb-1">
             <NuxtLink
-              :class="[link, activeLink === '/admin/users' ? active : '']"
-              @click="setActiveLink('/admin/users')"
-              to="/admin/users"
-              ><Icon class="mr-2" name="mdi:account-group-outline" />Users</NuxtLink
-            >
-          </li>
-          <li class="pb-1">
-            <NuxtLink
-              :class="[link, activeLink === '/admin/settings' ? active : '']"
-              @click="setActiveLink('/admin/settings')"
+              :class="[link, activeLink === 'settings' ? active : '']"
+              @click="setActiveLink('settings')"
               to="/admin/settings"
               ><Icon class="mr-2" name="mdi:cog-outline" />Settings</NuxtLink
             >

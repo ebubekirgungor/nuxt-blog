@@ -2,9 +2,11 @@
 import { useToast } from "vue-toastification";
 const { data } = useAuth();
 const { data: user } = await useFetch<string | any>(
-  "/api/users/" + data!.value!.user!.id
+  "/api/users/" + (data!.value!.user as any).id
 );
 const toast = useToast();
+const activeLink = useActiveLink();
+activeLink.value = "pages";
 
 definePageMeta({
   layout: "admin",

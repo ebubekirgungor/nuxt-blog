@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
-const toast = useToast();
-const route = useRoute();
-
 const { data } = useAuth();
+const route = useRoute();
 const { data: user } = await useFetch<string | any>(
-  "/api/users/" + data!.value!.user!.id
+  "/api/users/" + (data!.value!.user as any).id
 );
+
+const toast = useToast();
+const activeLink = useActiveLink();
+activeLink.value = "pages";
 
 interface Page {
   name: string;

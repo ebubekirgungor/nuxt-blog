@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
 const toast = useToast();
+const activeLink = useActiveLink();
+activeLink.value = "users";
 
 definePageMeta({
   layout: "admin",

@@ -4,8 +4,11 @@ const toast = useToast();
 const route = useRoute();
 
 const { data } = useAuth();
+const activeLink = useActiveLink();
+activeLink.value = "posts";
+
 const { data: user } = await useFetch<string | any>(
-  "/api/users/" + data!.value!.user!.id
+  "/api/users/" + (data!.value!.user as any).id
 );
 
 interface Post {

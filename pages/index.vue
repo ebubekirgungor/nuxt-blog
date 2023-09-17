@@ -1,6 +1,9 @@
 <script setup lang="ts">
+const blogTitle = useBlogTitle();
+console.log(blogTitle.value);
+
 useHead({
-  title: "Blog",
+  title: blogTitle.value,
 });
 
 interface Post {
