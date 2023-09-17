@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const blogTitle = useBlogTitle();
-console.log(blogTitle.value);
 
 useHead({
   title: blogTitle.value,
