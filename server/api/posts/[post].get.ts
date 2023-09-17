@@ -2,42 +2,54 @@ import posts from "../../models/post";
 export default defineEventHandler(async (event) => {
   const postName = getRouterParam(event, "post");
   const { type, date } = getQuery(event);
-  const isPage = type == "page";
   console.log(`GET /api/posts/${postName}`);
   try {
     console.log("Find post");
     const pagequery = {
       name: postName,
-      page: isPage,
+      page: true,
     };
 
     const postquery = {
       name: postName,
-      page: isPage,
+      page: false,
       createdAt: {},
+    };
+
+    const post_by_name = {
+      name: postName,
+      page: false,
     };
 
     let postData;
 
-    if (!isPage) {
-      const start = new Date(date as Date);
-      start.setHours(0, 0, 0, 0);
-      const end = new Date(date as Date);
-      end.setHours(23, 59, 59, 999);
-      postquery.createdAt = {
-        $gte: start,
-        $lte: end,
-      };
-      postData = await posts.findOne(postquery);
-    } else {
-      postData = await posts.findOne(pagequery);
+    switch(type) {
+      case "page": 
+        postData = await posts.findOne(pagequery);
+        break;
+      case "post":
+        const start = new Date(date as Date);
+        start.setHours(0, 0, 0, 0);
+        const end = new Date(date as Date);
+        end.setHours(23, 59, 59, 999);
+        postquery.createdAt = {
+          $gte: start,
+          $lte: end,
+        };
+        postData = await posts.findOne(postquery);
+        break;
+      case "post_by_name":
+        postData = await posts.findOne(post_by_name);
+        break;
     }
 
     if (postData) {
       return {
         id: postData._id,
+        name: postData.name,
         title: postData.title,
         content: postData.content,
+        date: postData.createdAt,
       };
     } else {
       console.log("Post not found");

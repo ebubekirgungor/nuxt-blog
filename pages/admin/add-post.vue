@@ -2,7 +2,7 @@
 import { useToast } from "vue-toastification";
 const { data } = useAuth();
 const { data: user } = await useFetch<string | any>(
-  "/api/users/" + data!.value!.user!.email
+  "/api/users/" + data!.value!.user!.id
 );
 const toast = useToast();
 
@@ -55,6 +55,7 @@ const submitForm = async () => {
       break;
     case "SUCCESS":
       toast.success("Post added");
+      navigateTo('/admin/posts');
       break;
     case "ERROR":
       toast.warning("Error");

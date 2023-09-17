@@ -51,7 +51,7 @@ const submitForm = async () => {
       break;
     case "SUCCESS":
       toast.success("User added");
-      navigateTo('/admin/users')
+      navigateTo('/admin/users');
       break;
     case "ERROR":
       toast.warning("Error");

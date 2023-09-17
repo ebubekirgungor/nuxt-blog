@@ -1,10 +1,22 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
+const toast = useToast();
+const route = useRoute();
+
 const { data } = useAuth();
 const { data: user } = await useFetch<string | any>(
   "/api/users/" + data!.value!.user!.id
 );
-const toast = useToast();
+
+interface Page {
+  name: string;
+  title: string;
+  author: string;
+}
+
+const { data: page } = await useFetch<Array<Page> | any>(
+  "/api/posts/" + route.query.page + "?type=page"
+);
 
 definePageMeta({
   layout: "admin",
@@ -24,38 +36,38 @@ const button = ref(
   "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
 );
 
-const newPage = ref({
-  name: "",
-  title: "",
-  content: "",
+const updatedPage = ref({
+  name: page.value.name,
+  title: page.value.title,
+  content: page.value.content,
 });
 
 const submitForm = async () => {
-  const { data: responseData } = await useFetch("/api/posts", {
-    method: "post",
-    body: {
-      name: newPage.value.name,
-      author: user.value.username,
-      title: newPage.value.title,
-      content: newPage.value.content,
-      page: true,
-    },
-  });
-  newPage.value = {
+  const { data: responseData } = await useFetch(
+    "/api/posts/" + route.query.page,
+    {
+      method: "post",
+      body: {
+        name: updatedPage.value.name,
+        author: user.value.username,
+        title: updatedPage.value.title,
+        content: updatedPage.value.content,
+        page: true,
+      },
+    }
+  );
+  updatedPage.value = {
     name: "",
     title: "",
     content: "",
   };
   switch (responseData.value) {
-    case "POST_EXISTS":
-      toast.warning("Page with given name already exists");
-      break;
     case "NOT_LOGGED_IN":
-      toast.error("Page can't added - Please login");
+      toast.error("Page can't updated - Please login");
       break;
     case "SUCCESS":
-      toast.success("Page added");
-      navigateTo('/admin/pages');
+      toast.success("Page updated");
+      navigateTo("/admin/pages");
       break;
     case "ERROR":
       toast.warning("Error");
@@ -65,28 +77,38 @@ const submitForm = async () => {
 </script>
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl select-none pb-6">Add Page</h1>
+    <h1 class="text-2xl select-none pb-6">Edit Page</h1>
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
           <label :class="label">Name (URL):</label>
-          <input v-model="newPage.name" required :class="input" type="text" />
+          <input
+            v-model="updatedPage.name"
+            required
+            :class="input"
+            type="text"
+          />
         </div>
         <div class="flex justify-between">
           <label :class="label">Title:</label>
-          <input v-model="newPage.title" required :class="input" type="text" />
+          <input
+            v-model="updatedPage.title"
+            required
+            :class="input"
+            type="text"
+          />
         </div>
         <div class="flex justify-between">
           <label :class="label">Content:</label>
           <textarea
-            v-model="newPage.content"
+            v-model="updatedPage.content"
             required
             :class="textarea"
             type="text"
           ></textarea>
         </div>
       </div>
-      <button type="submit" :class="button">Add</button>
+      <button type="submit" :class="button">Update</button>
     </form>
   </div>
 </template>

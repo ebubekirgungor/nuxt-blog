@@ -2,7 +2,6 @@
 const route = useRoute();
 
 interface Page {
-  name: string;
   title: string;
   content: string;
 }
