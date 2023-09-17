@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
 const { data, signOut } = useAuth();
-const { data: user } = await useFetch<string | any>("/api/users/" + data!.value!.user!.email);
+const { data: user } = await useFetch<string | any>("/api/users/" + data!.value!.user!.id);
 const main = ref("bg-emerald-50");
 const nav = ref("bg-[#05211d] sticky w-full top-0");
 const flex = ref("flex");

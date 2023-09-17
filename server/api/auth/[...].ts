@@ -6,7 +6,19 @@ export default NuxtAuthHandler({
   pages: {
     signIn: "/login",
   },
-
+  callbacks: {
+    jwt: async ({ token, user }) => {
+      const isSignIn = user ? true : false;
+      if (isSignIn) {
+        token.id = user ? user.id || "" : "";
+      }
+      return Promise.resolve(token);
+    },
+    session: async ({ session, token }) => {
+      (session as any).user.id = token.id;
+      return Promise.resolve(session);
+    },
+  },
   providers: [
     //@ts-ignore
     CredentialsProvider.default({

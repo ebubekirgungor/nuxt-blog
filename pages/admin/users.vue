@@ -18,16 +18,19 @@ interface User {
   posts: number;
 }
 
-const button = ref(
-  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
+const { data } = useAuth();
+const { data: currentuser } = await useFetch<string | any>(
+  "/api/users/" + data!.value!.user!.id
 );
 
-const { data: users } = await useFetch<Array<User>>("/api/users");
-/*let users = ref(data as User | any);
+let users: User | any = ref({});
+const { data: usersdata } = await useFetch<Array<User>>("/api/users");
+users.value = usersdata.value as User[];
 
 const getUsers = async () => {
-  users.value = await useFetch<Array<User>>("/api/users");
-}*/
+  const { data: getdata } = await useFetch<Array<User>>("/api/users");
+  users.value = getdata.value as User[];
+};
 
 const deleteDialog = ref(false);
 const id = ref("");
@@ -38,6 +41,7 @@ const deleteUser = async (id: string) => {
   switch (responseData.value) {
     case "USER_DELETED":
       toast.success("User deleted");
+      getUsers();
       break;
     case "NOT_LOGGED_IN":
       toast.error("User can't deleted - Please login");
@@ -47,14 +51,19 @@ const deleteUser = async (id: string) => {
       break;
   }
 };
+
+const button = ref(
+  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
+);
 </script>
 <style>
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity 0.3s;
+  transition: all 0.3s;
 }
 .modal-fade-enter-from,
 .modal-fade-leave-to {
+  transform: translateY(30px);
   opacity: 0;
 }
 </style>
@@ -77,7 +86,7 @@ const deleteUser = async (id: string) => {
                 deleteUser(id);
                 deleteDialog = false;
               "
-              :class="[button, 'bg-red-500 hover:bg-red-700']"
+              :class="['!bg-red-600 hover:!bg-red-700', button]"
             >
               Delete
             </button>
@@ -124,12 +133,20 @@ const deleteUser = async (id: string) => {
             {{ user.posts }}
           </td>
           <td class="py-2 pr-4 text-black flex float-right">
-            <div
+            <NuxtLink
+              :to="'edit-user?id=' + user.id"
               class="transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
             >
               <Icon name="mdi:pencil-outline" />
+            </NuxtLink>
+            <div
+              v-if="user.username == currentuser.username"
+              class="h-[40px] w-[40px] pl-2 pt-1.5 text-slate-500 bg-black/10 rounded-full mr-2"
+            >
+              <Icon name="mdi:trash-can-outline" />
             </div>
             <div
+              v-else
               @click="
                 deleteDialog = true;
                 id = user.id;

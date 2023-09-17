@@ -29,7 +29,22 @@ userSchema.pre<UserDocument>("save", async function (next) {
     this.password = hashedPassword;
     return next();
   } catch (error) {
-    throw(error);
+    throw error;
+  }
+});
+
+userSchema.pre("updateOne", async function (next) {
+  const data = this.getUpdate();
+  if (!data) {
+    return next();
+  }
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(data.password, salt);
+    data.password = hashedPassword;
+    return next();
+  } catch (error) {
+    throw error;
   }
 });
 

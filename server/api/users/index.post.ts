@@ -22,11 +22,11 @@ export default defineEventHandler(async (event) => {
       }));
     if (userData) {
       console.log(`User with email ${email} already exists`);
-      return "USER_EXISTS";
       event.res.statusCode = 409;
+      return "USER_EXISTS";
     } else if (!session) {
-      return "NOT_LOGGED_IN";
       event.res.statusCode = 403;
+      return "NOT_LOGGED_IN";
     } else {
       console.log("Create user");
       await users.create({
@@ -35,12 +35,12 @@ export default defineEventHandler(async (event) => {
         password,
         name,
       });
-      return "SUCCESS";
       event.res.statusCode = 200;
+      return "SUCCESS";
     }
   } catch (err) {
     console.dir(err);
-    return "ERROR";
     event.res.statusCode = 500;
+    return "ERROR";
   }
 });
