@@ -14,13 +14,9 @@ export default defineNuxtConfig({
     },
   },
   modules: ["@sidebase/nuxt-auth", "nuxt-icon"],
-  auth: {
-    origin: process.env.ORIGIN,
-  },
   css: ["~/assets/css/main.css"],
   app: {
     pageTransition: { name: "page", mode: "out-in" },
-    
   },
   colorMode: {
     preference: "light",
