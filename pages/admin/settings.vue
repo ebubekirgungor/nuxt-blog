@@ -23,24 +23,20 @@ const input = ref(
 );
 const label = ref("select-none mt-1");
 const button = ref(
-  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
+  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none disabled:bg-sky-300 disabled:pointer-events-none"
 );
-
-const initalOption = ref({
-  value: blog_title.value.value,
-});
 
 const updatedOption = ref({
   value: blog_title.value.value,
 });
 
-const check_input = () => {
-  updatedOption.value = initalOption;
+const input_changed = () => {
+  if (updatedOption.value.value != blog_title.value.value)
+    button_disabled.value = false;
+  else button_disabled.value = true;
 };
 
-const isButtonDisabled = () => {
-  return updatedOption.value == initalOption;
-};
+const button_disabled = ref(true);
 
 const submitForm = async () => {
   const { data: responseData } = await useFetch("/api/options", {
@@ -74,16 +70,11 @@ const submitForm = async () => {
             required
             :class="input"
             type="text"
-            @input="check_input"
+            @input="input_changed"
           />
         </div>
       </div>
-      <button
-        :disabled="isButtonDisabled"
-        type="submit"
-        :class="button"
-        
-      >
+      <button :disabled="button_disabled" type="submit" :class="button">
         Update
       </button>
     </form>
