@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       return "NOT_LOGGED_IN";
     } else {
       console.log("User not found");
-      event.res.statusCode = 404;
+      event.node.res.statusCode = 404;
       return {
         code: "USER_NOT_FOUND",
         message: `User with id ${userId} doesn't exists.`,
@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err) {
     console.dir(err);
-    event.res.statusCode = 500;
+    event.node.res.statusCode = 500;
     return {
       code: "ERROR",
       message: "Error",

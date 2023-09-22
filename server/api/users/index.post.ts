@@ -22,10 +22,10 @@ export default defineEventHandler(async (event) => {
       }));
     if (userData) {
       console.log(`User with email ${email} already exists`);
-      event.res.statusCode = 409;
+      event.node.res.statusCode = 409;
       return "USER_EXISTS";
     } else if (!session) {
-      event.res.statusCode = 403;
+      event.node.res.statusCode = 403;
       return "NOT_LOGGED_IN";
     } else {
       console.log("Create user");
@@ -35,12 +35,12 @@ export default defineEventHandler(async (event) => {
         password,
         name,
       });
-      event.res.statusCode = 200;
+      event.node.res.statusCode = 200;
       return "SUCCESS";
     }
   } catch (err) {
     console.dir(err);
-    event.res.statusCode = 500;
+    event.node.res.statusCode = 500;
     return "ERROR";
   }
 });

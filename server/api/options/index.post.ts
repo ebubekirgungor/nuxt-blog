@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err) {
     console.dir(err);
-    event.res.statusCode = 500;
+    event.node.res.statusCode = 500;
     return "ERROR";
   }
 });

@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
       };
     } else {
       console.log("Option not found");
-      event.res.statusCode = 404;
+      event.node.res.statusCode = 404;
       return {
         code: "OPTION_NOT_FOUND",
         message: `Option with name ${optionName} doesn't exists.`,
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err) {
     console.dir(err);
-    event.res.statusCode = 500;
+    event.node.res.statusCode = 500;
     return {
       code: "ERROR",
       message: "Error",

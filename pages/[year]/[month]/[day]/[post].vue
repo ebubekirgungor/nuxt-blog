@@ -12,13 +12,17 @@ const { data: post } = await useFetch<Post>(
   `/api/posts/${route.params.post}?type=post&date=${date[1]}-${date[2]}-${date[3]}`
 );
 
+if (!post.value) {
+  throw createError({ statusCode: 404, statusMessage: "Post Not Found" });
+}
+
 useHead({
   title: post.value!.title,
 });
 
-const flex = ref('flex flex-col mt-14 ml-[10%] md:ml-[32%]');
-const title = ref('text-[50px]');
-const content = ref('mt-14 text-[17px]');
+const flex = ref("flex flex-col mt-14 ml-[10%] md:ml-[32%]");
+const title = ref("text-[50px]");
+const content = ref("mt-14 text-[17px]");
 </script>
 <template>
   <div v-if="post" :class="flex">
