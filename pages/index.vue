@@ -1,8 +1,7 @@
 <script setup lang="ts">
-const blogTitle = useBlogTitle();
-
+const blogTitle = await useBlogTitle();
 useHead({
-  title: blogTitle.value,
+  title: (blogTitle as any).data.value.value,
 });
 
 interface Post {

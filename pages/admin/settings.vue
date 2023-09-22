@@ -3,16 +3,16 @@ import { useToast } from "vue-toastification";
 const toast = useToast();
 
 interface Option {
-  name: string;
   value: string;
 }
 
-const { data: blog_title_data } = await useFetch("/api/options");
-const blog_title = blog_title_data["_rawValue"].filter(function (option: {
+const { data: blog_title } = await useFetch<Option | any>("/api/options/blog_title");
+
+/*const blog_title = (options.value as Option | any).filter(function (option: {
   name: string;
 }) {
   return option.name == "blog_title";
-});
+})[0].value;*/
 
 definePageMeta({
   layout: "admin",
@@ -31,7 +31,7 @@ const button = ref(
 );
 
 const updatedOption = ref({
-  value: blog_title[0].value,
+  value: blog_title.value.value,
 });
 
 const submitForm = async () => {
