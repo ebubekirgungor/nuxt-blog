@@ -6,13 +6,9 @@ interface Option {
   value: string;
 }
 
-const { data: blog_title } = await useFetch<Option | any>("/api/options/blog_title");
-
-/*const blog_title = (options.value as Option | any).filter(function (option: {
-  name: string;
-}) {
-  return option.name == "blog_title";
-})[0].value;*/
+const { data: blog_title } = await useFetch<Option | any>(
+  "/api/options/blog_title"
+);
 
 definePageMeta({
   layout: "admin",
@@ -30,9 +26,21 @@ const button = ref(
   "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
 );
 
+const initalOption = ref({
+  value: blog_title.value.value,
+});
+
 const updatedOption = ref({
   value: blog_title.value.value,
 });
+
+const check_input = () => {
+  updatedOption.value = initalOption;
+};
+
+const isButtonDisabled = () => {
+  return updatedOption.value == initalOption;
+};
 
 const submitForm = async () => {
   const { data: responseData } = await useFetch("/api/options", {
@@ -66,10 +74,18 @@ const submitForm = async () => {
             required
             :class="input"
             type="text"
+            @input="check_input"
           />
         </div>
       </div>
-      <button type="submit" :class="button">Update</button>
+      <button
+        :disabled="isButtonDisabled"
+        type="submit"
+        :class="button"
+        
+      >
+        Update
+      </button>
     </form>
   </div>
 </template>
