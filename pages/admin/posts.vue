@@ -48,21 +48,32 @@ const deletePost = async (name: string) => {
 const button = ref(
   "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
 );
+const dialog_background = ref(
+  "bg-black/50 inset-x-0 inset-y-0 w-full h-full fixed"
+);
+const dialog = ref(
+  "fixed mt-[16%] z-20 flex flex-col m-auto inset-x-0 inset-y-0 p-6 w-[350px] h-[200px] bg-white rounded-xl shadow-xl"
+);
+const dialog_text = ref("text-2xl text-center grow select-none pb-6");
+const dialog_buttons = ref("flex justify-end space-x-2");
+const add_button = ref(
+  "transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
+);
+const table = ref(
+  "w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500"
+);
+const thead = ref("select-none text-gray-700 bg-gray-50");
+const action_button = ref(
+  "transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
+);
 </script>
 <template>
   <div>
     <transition name="modal-fade" mode="out-in">
-      <div
-        v-if="deleteDialog"
-        class="bg-black/50 inset-x-0 inset-y-0 w-full h-full fixed"
-      >
-        <div
-          class="fixed mt-[16%] z-20 flex flex-col m-auto inset-x-0 inset-y-0 p-6 w-[350px] h-[200px] bg-white rounded-xl shadow-xl"
-        >
-          <h1 class="text-2xl text-center grow select-none pb-6">
-            Are you sure ?
-          </h1>
-          <div class="flex justify-end space-x-2">
+      <div v-if="deleteDialog" :class="dialog_background">
+        <div :class="dialog">
+          <h1 :class="dialog_text">Are you sure ?</h1>
+          <div :class="dialog_buttons">
             <button
               @click="
                 deletePost(name);
@@ -81,17 +92,10 @@ const button = ref(
     </transition>
     <div class="flex">
       <h1 class="text-2xl select-none pb-6">Posts</h1>
-      <NuxtLink
-        to="add-post"
-        class="transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
-      >
-        Add
-      </NuxtLink>
+      <NuxtLink to="add-post" :class="add_button"> Add </NuxtLink>
     </div>
-    <table
-      class="w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500"
-    >
-      <thead class="select-none text-gray-700 bg-gray-50">
+    <table :class="table">
+      <thead :class="thead">
         <tr>
           <th scope="col" class="px-6 py-3">Name (URL)</th>
           <th scope="col" class="px-6 py-3">Title</th>
@@ -115,7 +119,7 @@ const button = ref(
           <td class="py-2 pr-4 text-black flex float-right">
             <NuxtLink
               :to="'edit-post?post=' + post.name"
-              class="transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
+              :class="action_button"
             >
               <Icon name="mdi:pencil-outline" />
             </NuxtLink>
@@ -124,7 +128,7 @@ const button = ref(
                 deleteDialog = true;
                 name = post.name;
               "
-              class="transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
+              :class="action_button"
             >
               <Icon name="mdi:trash-can-outline" />
             </div>

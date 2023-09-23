@@ -55,23 +55,36 @@ const deleteUser = async (id: string) => {
 const button = ref(
   "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
 );
-
+const dialog_background = ref(
+  "bg-black/50 inset-x-0 inset-y-0 w-full h-full fixed"
+);
+const dialog = ref(
+  "fixed mt-[16%] z-20 flex flex-col m-auto inset-x-0 inset-y-0 p-6 w-[350px] h-[200px] bg-white rounded-xl shadow-xl"
+);
+const dialog_text = ref("text-2xl text-center grow select-none pb-6");
+const dialog_buttons = ref("flex justify-end space-x-2");
+const add_button = ref(
+  "transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
+);
+const table = ref(
+  "w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500"
+);
+const thead = ref("select-none text-gray-700 bg-gray-50");
+const action_button = ref(
+  "transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
+);
+const action_button_disabled = ref(
+  "h-[40px] w-[40px] pl-2 pt-1.5 text-slate-500 bg-black/10 rounded-full mr-2"
+);
 const activeLink = useActiveLink();
 </script>
 <template>
   <div>
     <transition name="modal-fade" mode="out-in">
-      <div
-        v-if="deleteDialog"
-        class="bg-black/50 inset-x-0 inset-y-0 w-full h-full fixed"
-      >
-        <div
-          class="fixed mt-[16%] z-20 flex flex-col m-auto inset-x-0 inset-y-0 p-6 w-[350px] h-[200px] bg-white rounded-xl shadow-xl"
-        >
-          <h1 class="text-2xl text-center grow select-none pb-6">
-            Are you sure ?
-          </h1>
-          <div class="flex justify-end space-x-2">
+      <div v-if="deleteDialog" :class="dialog_background">
+        <div :class="dialog">
+          <h1 :class="dialog_text">Are you sure ?</h1>
+          <div :class="dialog_buttons">
             <button
               @click="
                 deleteUser(id);
@@ -90,17 +103,10 @@ const activeLink = useActiveLink();
     </transition>
     <div class="flex">
       <h1 class="text-2xl select-none pb-6">Users</h1>
-      <NuxtLink
-        to="add-user"
-        class="transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
-      >
-        Add
-      </NuxtLink>
+      <NuxtLink to="add-user" :class="add_button"> Add </NuxtLink>
     </div>
-    <table
-      class="w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500"
-    >
-      <thead class="select-none text-gray-700 bg-gray-50">
+    <table :class="table">
+      <thead :class="thead">
         <tr>
           <th scope="col" class="px-6 py-3">Username</th>
           <th scope="col" class="py-3">Email</th>
@@ -126,14 +132,18 @@ const activeLink = useActiveLink();
           <td class="py-2 pr-4 text-black flex float-right">
             <NuxtLink
               :to="'edit-user?id=' + user.id"
-              @click="user.username == currentuser.username ? activeLink = 'profile' : activeLink = 'users'"
-              class="transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
+              @click="
+                user.username == currentuser.username
+                  ? (activeLink = 'profile')
+                  : (activeLink = 'users')
+              "
+              :class="action_button"
             >
               <Icon name="mdi:pencil-outline" />
             </NuxtLink>
             <div
               v-if="user.username == currentuser.username"
-              class="h-[40px] w-[40px] pl-2 pt-1.5 text-slate-500 bg-black/10 rounded-full mr-2"
+              :class="action_button_disabled"
             >
               <Icon name="mdi:trash-can-outline" />
             </div>
@@ -143,7 +153,7 @@ const activeLink = useActiveLink();
                 deleteDialog = true;
                 id = user.id;
               "
-              class="transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
+              :class="action_button"
             >
               <Icon name="mdi:trash-can-outline" />
             </div>
