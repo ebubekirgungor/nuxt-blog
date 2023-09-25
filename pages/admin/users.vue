@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+import { useToast } from "vue-toastification";
 const toast = useToast();
 
 definePageMeta({

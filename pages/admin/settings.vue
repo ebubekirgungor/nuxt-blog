@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
 import { useTitle } from "@vueuse/core";
+import { useI18n } from "vue-i18n";
 const { t, locale } = useI18n();
 const toast = useToast();
 

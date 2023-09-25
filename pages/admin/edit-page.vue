@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+import { useToast } from "vue-toastification";
 const { data } = useAuth();
 const route = useRoute();
 const { data: user } = await useFetch<string | any>(

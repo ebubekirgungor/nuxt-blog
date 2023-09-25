@@ -1,6 +1,7 @@
 <script setup lang="ts">
-const route = useRoute();
+import { useI18n } from "vue-i18n";
 const { t } = useI18n();
+const route = useRoute();
 const { data, signOut } = useAuth();
 const { data: user } = await useFetch<string | any>(
   "/api/users/" + (data!.value!.user as any).id

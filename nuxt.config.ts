@@ -13,16 +13,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["@sidebase/nuxt-auth", "nuxt-icon", "@nuxtjs/i18n"],
+  modules: ["@sidebase/nuxt-auth", "nuxt-icon"],
   css: ["~/assets/css/main.css"],
   app: {
     pageTransition: { name: "page", mode: "out-in" },
   },
   build: {
     transpile: ["vue-toastification"],
-  },
-  i18n: {
-    vueI18n: "./i18n.config.ts",
-    baseUrl: process.env.BASE_URL,
   },
 });
