@@ -23,5 +23,6 @@ export default defineNuxtConfig({
   },
   i18n: {
     vueI18n: "./i18n.config.ts",
+    baseUrl: process.env.BASE_URL,
   },
 });
