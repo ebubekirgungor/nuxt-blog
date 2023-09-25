@@ -31,7 +31,9 @@ const setActiveLink = (link: string) => {
       <div class="mx-auto px-2 sm:px-6 lg:px-3">
         <div class="flex h-10 items-center justify-between">
           <div class="grow flex items-center ml-4">
-            <NuxtLink class="text-white select-none" to="/">Home</NuxtLink>
+            <NuxtLink class="text-white select-none" to="/">{{
+              $t("home")
+            }}</NuxtLink>
           </div>
           <div>
             <div
@@ -60,10 +62,12 @@ const setActiveLink = (link: string) => {
                   <NuxtLink
                     @click="setActiveLink('profile')"
                     :to="'/admin/edit-user?id=' + user.id"
-                    >Profile</NuxtLink
+                    >{{ $t("profile") }}</NuxtLink
                   >
                 </div>
-                <div @click="signOut()" class="cursor-pointer">Logout</div>
+                <div @click="signOut()" class="cursor-pointer">
+                  {{ $t("logout") }}
+                </div>
               </div>
             </div>
           </div>
@@ -78,10 +82,9 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === 'admin' ? active : '']"
               @click="setActiveLink('admin')"
               to="/admin"
-              ><Icon
-                class="mr-2"
-                name="mdi:view-dashboard-outline"
-              />Dashboard</NuxtLink
+              ><Icon class="mr-2" name="mdi:view-dashboard-outline" />{{
+                $t("dashboard")
+              }}</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -89,10 +92,9 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === 'pages' ? active : '']"
               @click="setActiveLink('pages')"
               to="/admin/pages"
-              ><Icon
-                class="mr-2"
-                name="mdi:text-box-multiple-outline"
-              />Pages</NuxtLink
+              ><Icon class="mr-2" name="mdi:text-box-multiple-outline" />{{
+                $t("pages")
+              }}</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -100,7 +102,9 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === 'posts' ? active : '']"
               @click="setActiveLink('posts')"
               to="/admin/posts"
-              ><Icon class="mr-2" name="mdi:pin-outline" />Posts</NuxtLink
+              ><Icon class="mr-2" name="mdi:pin-outline" />{{
+                $t("posts")
+              }}</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -108,10 +112,9 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === 'users' ? active : '']"
               @click="setActiveLink('users')"
               to="/admin/users"
-              ><Icon
-                class="mr-2"
-                name="mdi:account-group-outline"
-              />Users</NuxtLink
+              ><Icon class="mr-2" name="mdi:account-group-outline" />{{
+                $t("users")
+              }}</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -120,7 +123,9 @@ const setActiveLink = (link: string) => {
               @click="setActiveLink('profile')"
               ref="profile"
               :to="'/admin/edit-user?id=' + user.id"
-              ><Icon class="mr-2" name="mdi:account-outline" />Profile</NuxtLink
+              ><Icon class="mr-2" name="mdi:account-outline" />{{
+                $t("profile")
+              }}</NuxtLink
             >
           </li>
           <li class="pb-1">
@@ -128,7 +133,9 @@ const setActiveLink = (link: string) => {
               :class="[link, activeLink === 'settings' ? active : '']"
               @click="setActiveLink('settings')"
               to="/admin/settings"
-              ><Icon class="mr-2" name="mdi:cog-outline" />Settings</NuxtLink
+              ><Icon class="mr-2" name="mdi:cog-outline" />{{
+                $t("settings")
+              }}</NuxtLink
             >
           </li>
         </ul>

@@ -1,21 +1,19 @@
 import options from "../../models/option";
 import { getServerSession } from "#auth";
-interface IRequestBody {
-  option: string;
-  value: string;
-}
 export default defineEventHandler(async (event) => {
   console.log("POST /api/options");
-  const { option, value } = await readBody<IRequestBody>(event);
+  const body = await readBody(event);
   const session = await getServerSession(event);
   try {
     if (session) {
-      await options.updateMany(
-        { option: option },
-        {
-          value: value,
-        }
-      );
+      for (var i = 0; i < body.length; i++) {
+        await options.updateMany(
+          { name: body[i].option },
+          {
+            value: body[i].value,
+          }
+        );
+      }
       return "SUCCESS";
     } else {
       return "NOT_LOGGED_IN";

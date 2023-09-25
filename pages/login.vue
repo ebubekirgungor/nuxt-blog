@@ -16,11 +16,11 @@
             :class="form"
           >
             <div>
-              <label :class="label_text">Username or Email</label>
+              <label :class="label_text">{{ $t("username_or_email") }}</label>
               <input type="text" v-model="email" :class="input_text" />
             </div>
             <div>
-              <label :class="label_text">Password</label>
+              <label :class="label_text">{{ $t("password") }}</label>
               <input type="password" v-model="password" :class="input_text" />
             </div>
             <div :class="flex">
@@ -34,12 +34,12 @@
                   />
                 </div>
                 <div class="ml-3 text-sm">
-                  <label :class="label_checkbox" for="remember"
-                    >Remember me</label
-                  >
+                  <label :class="label_checkbox" for="remember">{{
+                    $t("remember_me")
+                  }}</label>
                 </div>
               </div>
-              <button type="submit" :class="button">Login</button>
+              <button type="submit" :class="button">{{ $t("login") }}</button>
             </div>
           </form>
         </div>
@@ -48,6 +48,7 @@
   </main>
 </template>
 <script setup lang="ts">
+const { t } = useI18n();
 const email = ref("");
 const password = ref("");
 definePageMeta({
@@ -57,7 +58,7 @@ definePageMeta({
   layout: "login",
 });
 useHead({
-  title: "Login",
+  title: t("login"),
 });
 const { signIn } = useAuth();
 

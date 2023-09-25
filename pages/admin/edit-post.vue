@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
+const { t } = useI18n();
 const toast = useToast();
 const route = useRoute();
 
@@ -26,7 +27,7 @@ definePageMeta({
   middleware: "auth",
 });
 useHead({
-  title: "Add Page",
+  title: t("edit_post"),
 });
 const input = ref(
   "transition duration-200 ease-in-out ml-20 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:outline-none focus:ring-sky-400 focus:border-sky-400 block w-[250px] h-9 p-2.5"
@@ -66,25 +67,25 @@ const submitForm = async () => {
   };
   switch (responseData.value) {
     case "NOT_LOGGED_IN":
-      toast.error("Post can't updated - Please login");
+      toast.error(t("post") + t("NOT_LOGGED_IN_UPDATE"));
       break;
     case "SUCCESS":
-      toast.success("Post updated");
+      toast.success(t("post") + t("SUCCESS_UPDATE"));
       navigateTo("/admin/posts");
       break;
     case "ERROR":
-      toast.warning("Error");
+      toast.warning(t("ERROR"));
       break;
   }
 };
 </script>
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl select-none pb-6">Edit Post</h1>
+    <h1 class="text-2xl select-none pb-6">{{ $t("edit_post") }}</h1>
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
-          <label :class="label">Name (URL):</label>
+          <label :class="label">{{ $t("name") }} (URL):</label>
           <input
             v-model="updatedPost.name"
             required
@@ -93,7 +94,7 @@ const submitForm = async () => {
           />
         </div>
         <div class="flex justify-between">
-          <label :class="label">Title:</label>
+          <label :class="label">{{ $t("title") }}:</label>
           <input
             v-model="updatedPost.title"
             required
@@ -102,7 +103,7 @@ const submitForm = async () => {
           />
         </div>
         <div class="flex justify-between">
-          <label :class="label">Content:</label>
+          <label :class="label">{{ $t("content") }}:</label>
           <textarea
             v-model="updatedPost.content"
             required
@@ -111,7 +112,7 @@ const submitForm = async () => {
           ></textarea>
         </div>
       </div>
-      <button type="submit" :class="button">Update</button>
+      <button type="submit" :class="button">{{ $t("update") }}</button>
     </form>
   </div>
 </template>

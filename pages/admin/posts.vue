@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
+const { t } = useI18n();
 const toast = useToast();
 
 definePageMeta({
@@ -7,7 +8,7 @@ definePageMeta({
   middleware: "auth",
 });
 useHead({
-  title: "Posts",
+  title: t("posts"),
 });
 
 interface Post {
@@ -33,14 +34,14 @@ const deletePost = async (name: string) => {
   });
   switch (responseData.value) {
     case "POST_DELETED":
-      toast.success("Post deleted");
+      toast.success(t("post") + t("DELETED"));
       getPosts();
       break;
     case "NOT_LOGGED_IN":
-      toast.error("Post can't deleted - Please login");
+      toast.error(t("post") + t("NOT_LOGGED_IN_DELETE"));
       break;
     case "ERROR":
-      toast.warning("Error");
+      toast.warning(t("ERROR"));
       break;
   }
 };
@@ -72,7 +73,7 @@ const action_button = ref(
     <transition name="modal-fade" mode="out-in">
       <div v-if="deleteDialog" :class="dialog_background">
         <div :class="dialog">
-          <h1 :class="dialog_text">Are you sure ?</h1>
+          <h1 :class="dialog_text">{{ $t("are_you_sure") }}</h1>
           <div :class="dialog_buttons">
             <button
               @click="
@@ -81,25 +82,25 @@ const action_button = ref(
               "
               :class="['!bg-red-600 hover:!bg-red-700', button]"
             >
-              Delete
+              {{ $t("delete") }}
             </button>
             <button @click="deleteDialog = false" :class="button">
-              Cancel
+              {{ $t("cancel") }}
             </button>
           </div>
         </div>
       </div>
     </transition>
     <div class="flex">
-      <h1 class="text-2xl select-none pb-6">Posts</h1>
-      <NuxtLink to="add-post" :class="add_button"> Add </NuxtLink>
+      <h1 class="text-2xl select-none pb-6">{{ $t("posts") }}</h1>
+      <NuxtLink to="add-post" :class="add_button"> {{ $t("add") }} </NuxtLink>
     </div>
     <table :class="table">
       <thead :class="thead">
         <tr>
-          <th scope="col" class="px-6 py-3">Name (URL)</th>
-          <th scope="col" class="px-6 py-3">Title</th>
-          <th scope="col" class="py-3 pl-6">Author</th>
+          <th scope="col" class="px-6 py-3">{{ $t("name") }} (URL)</th>
+          <th scope="col" class="px-6 py-3">{{ $t("title") }}</th>
+          <th scope="col" class="py-3 pl-6">{{ $t("author") }}</th>
           <th scope="col" class="py-3 pr-6 float-right"></th>
         </tr>
       </thead>

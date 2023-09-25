@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
+const { t } = useI18n();
 const toast = useToast();
 const route = useRoute();
 const { data } = useAuth();
@@ -26,12 +27,15 @@ const { data: user } = await useFetch<Array<User> | any>(
   "/api/users/" + route.query.id
 );
 
-watch(() => route.query.id, () => window.location.reload())
+watch(
+  () => route.query.id,
+  () => window.location.reload()
+);
 
 let title: string;
 
-if ((data!.value!.user as any).id == route.query.id) title = "Profile";
-else title = "Edit User";
+if ((data!.value!.user as any).id == route.query.id) title = t("profile");
+else title = t("edit_user");
 
 definePageMeta({
   layout: "admin",
@@ -78,14 +82,14 @@ const submitForm = async () => {
   };
   switch (responseData.value) {
     case "NOT_LOGGED_IN":
-      toast.error("User can't updated - Please login");
+      toast.error(t("user") + t("NOT_LOGGED_IN_UPDATE"));
       break;
     case "SUCCESS":
-      toast.success("User updated");
+      toast.success(t("user") + t("SUCCESS_UPDATE"));
       navigateTo("/admin/users");
       break;
     case "ERROR":
-      toast.warning("Error");
+      toast.warning(t("ERROR"));
       break;
   }
 };
@@ -96,7 +100,7 @@ const submitForm = async () => {
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
-          <label :class="label">Username:</label>
+          <label :class="label">{{ $t("username") }}:</label>
           <input
             v-model="updatedUser.username"
             required
@@ -105,7 +109,7 @@ const submitForm = async () => {
           />
         </div>
         <div class="flex justify-between">
-          <label :class="label">Email:</label>
+          <label :class="label">{{ $t("email") }}:</label>
           <input
             v-model="updatedUser.email"
             required
@@ -114,15 +118,15 @@ const submitForm = async () => {
           />
         </div>
         <div class="flex justify-between">
-          <label :class="label">First Name:</label>
+          <label :class="label">{{ $t("first_name") }}:</label>
           <input v-model="updatedUser.firstname" :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">Last Name:</label>
+          <label :class="label">{{ $t("last_name") }}:</label>
           <input v-model="updatedUser.lastname" :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">New Password:</label>
+          <label :class="label">{{ $t("new_password") }}:</label>
           <input
             v-model="updatedUser.password"
             required
@@ -131,7 +135,7 @@ const submitForm = async () => {
           />
         </div>
       </div>
-      <button type="submit" :class="button">Update</button>
+      <button type="submit" :class="button">{{ $t("update") }}</button>
     </form>
   </div>
 </template>

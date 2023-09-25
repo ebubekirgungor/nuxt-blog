@@ -3,6 +3,11 @@
     <NuxtPage />
   </NuxtLayout>
 </template>
+<script setup lang="ts">
+const { locale } = useI18n();
+const lang = await useFetch("/api/options/lang");
+locale.value = (lang as any).data.value.value;
+</script>
 <style>
 .page-enter-active,
 .page-leave-active {
