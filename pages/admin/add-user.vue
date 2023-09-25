@@ -64,11 +64,11 @@ const submitForm = async () => {
 </script>
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl select-none pb-6">{{ $t("add_user") }}</h1>
+    <h1 class="text-2xl select-none pb-6">{{ t("add_user") }}</h1>
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
-          <label :class="label">{{ $t("username") }}:</label>
+          <label :class="label">{{ t("username") }}:</label>
           <input
             v-model="newUser.username"
             required
@@ -77,19 +77,19 @@ const submitForm = async () => {
           />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("email") }}:</label>
+          <label :class="label">{{ t("email") }}:</label>
           <input v-model="newUser.email" required :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("first_name") }}:</label>
+          <label :class="label">{{ t("first_name") }}:</label>
           <input v-model="newUser.firstname" :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("last_name") }}:</label>
+          <label :class="label">{{ t("last_name") }}:</label>
           <input v-model="newUser.lastname" :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("password") }}:</label>
+          <label :class="label">{{ t("password") }}:</label>
           <input
             v-model="newUser.password"
             required
@@ -98,7 +98,7 @@ const submitForm = async () => {
           />
         </div>
       </div>
-      <button type="submit" :class="button">{{ $t("add") }}</button>
+      <button type="submit" :class="button">{{ t("add") }}</button>
     </form>
   </div>
 </template>

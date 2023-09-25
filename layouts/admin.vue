@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const route = useRoute();
+const { t } = useI18n();
 const { data, signOut } = useAuth();
 const { data: user } = await useFetch<string | any>(
   "/api/users/" + (data!.value!.user as any).id
@@ -32,7 +33,7 @@ const setActiveLink = (link: string) => {
         <div class="flex h-10 items-center justify-between">
           <div class="grow flex items-center ml-4">
             <NuxtLink class="text-white select-none" to="/">{{
-              $t("home")
+              t("home")
             }}</NuxtLink>
           </div>
           <div>
@@ -62,11 +63,11 @@ const setActiveLink = (link: string) => {
                   <NuxtLink
                     @click="setActiveLink('profile')"
                     :to="'/admin/edit-user?id=' + user.id"
-                    >{{ $t("profile") }}</NuxtLink
+                    >{{ t("profile") }}</NuxtLink
                   >
                 </div>
                 <div @click="signOut()" class="cursor-pointer">
-                  {{ $t("logout") }}
+                  {{ t("logout") }}
                 </div>
               </div>
             </div>
@@ -83,7 +84,7 @@ const setActiveLink = (link: string) => {
               @click="setActiveLink('admin')"
               to="/admin"
               ><Icon class="mr-2" name="mdi:view-dashboard-outline" />{{
-                $t("dashboard")
+                t("dashboard")
               }}</NuxtLink
             >
           </li>
@@ -93,7 +94,7 @@ const setActiveLink = (link: string) => {
               @click="setActiveLink('pages')"
               to="/admin/pages"
               ><Icon class="mr-2" name="mdi:text-box-multiple-outline" />{{
-                $t("pages")
+                t("pages")
               }}</NuxtLink
             >
           </li>
@@ -103,7 +104,7 @@ const setActiveLink = (link: string) => {
               @click="setActiveLink('posts')"
               to="/admin/posts"
               ><Icon class="mr-2" name="mdi:pin-outline" />{{
-                $t("posts")
+                t("posts")
               }}</NuxtLink
             >
           </li>
@@ -113,7 +114,7 @@ const setActiveLink = (link: string) => {
               @click="setActiveLink('users')"
               to="/admin/users"
               ><Icon class="mr-2" name="mdi:account-group-outline" />{{
-                $t("users")
+                t("users")
               }}</NuxtLink
             >
           </li>
@@ -124,7 +125,7 @@ const setActiveLink = (link: string) => {
               ref="profile"
               :to="'/admin/edit-user?id=' + user.id"
               ><Icon class="mr-2" name="mdi:account-outline" />{{
-                $t("profile")
+                t("profile")
               }}</NuxtLink
             >
           </li>
@@ -134,7 +135,7 @@ const setActiveLink = (link: string) => {
               @click="setActiveLink('settings')"
               to="/admin/settings"
               ><Icon class="mr-2" name="mdi:cog-outline" />{{
-                $t("settings")
+                t("settings")
               }}</NuxtLink
             >
           </li>

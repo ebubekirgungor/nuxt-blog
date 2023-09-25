@@ -93,11 +93,11 @@ const submitForm = async () => {
 </script>
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl select-none pb-6">{{ $t("settings") }}</h1>
+    <h1 class="text-2xl select-none pb-6">{{ t("settings") }}</h1>
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
-          <label :class="label">{{ $t("title") }}:</label>
+          <label :class="label">{{ t("title") }}:</label>
           <input
             v-model="updatedBlog.value"
             required
@@ -107,20 +107,20 @@ const submitForm = async () => {
           />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("language") }}:</label>
+          <label :class="label">{{ t("language") }}:</label>
           <select
             :class="select"
             @change="select_changed"
             v-model="updatedLang"
           >
             <option v-for="lang in languages" :value="lang">
-              {{ $t(lang) }}
+              {{ t(lang) }}
             </option>
           </select>
         </div>
       </div>
       <button :disabled="button_disabled" type="submit" :class="button">
-        {{ $t("update") }}
+        {{ t("update") }}
       </button>
     </form>
   </div>

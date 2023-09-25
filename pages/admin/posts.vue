@@ -73,7 +73,7 @@ const action_button = ref(
     <transition name="modal-fade" mode="out-in">
       <div v-if="deleteDialog" :class="dialog_background">
         <div :class="dialog">
-          <h1 :class="dialog_text">{{ $t("are_you_sure") }}</h1>
+          <h1 :class="dialog_text">{{ t("are_you_sure") }}</h1>
           <div :class="dialog_buttons">
             <button
               @click="
@@ -82,25 +82,25 @@ const action_button = ref(
               "
               :class="['!bg-red-600 hover:!bg-red-700', button]"
             >
-              {{ $t("delete") }}
+              {{ t("delete") }}
             </button>
             <button @click="deleteDialog = false" :class="button">
-              {{ $t("cancel") }}
+              {{ t("cancel") }}
             </button>
           </div>
         </div>
       </div>
     </transition>
     <div class="flex">
-      <h1 class="text-2xl select-none pb-6">{{ $t("posts") }}</h1>
-      <NuxtLink to="add-post" :class="add_button"> {{ $t("add") }} </NuxtLink>
+      <h1 class="text-2xl select-none pb-6">{{ t("posts") }}</h1>
+      <NuxtLink to="add-post" :class="add_button"> {{ t("add") }} </NuxtLink>
     </div>
     <table :class="table">
       <thead :class="thead">
         <tr>
-          <th scope="col" class="px-6 py-3">{{ $t("name") }} (URL)</th>
-          <th scope="col" class="px-6 py-3">{{ $t("title") }}</th>
-          <th scope="col" class="py-3 pl-6">{{ $t("author") }}</th>
+          <th scope="col" class="px-6 py-3">{{ t("name") }} (URL)</th>
+          <th scope="col" class="px-6 py-3">{{ t("title") }}</th>
+          <th scope="col" class="py-3 pl-6">{{ t("author") }}</th>
           <th scope="col" class="py-3 pr-6 float-right"></th>
         </tr>
       </thead>

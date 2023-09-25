@@ -23,11 +23,11 @@ const box = ref(
 <template>
   <div :class="box">
     <div class="flex justify-between">
-      <span>{{ $t("pages") }}:</span>
+      <span>{{ t("pages") }}:</span>
       <span>{{ count.pages }}</span>
     </div>
     <div class="flex justify-between">
-      <span>{{ $t("posts") }}:</span>
+      <span>{{ t("posts") }}:</span>
       <span>{{ count.posts }}</span>
     </div>
   </div>

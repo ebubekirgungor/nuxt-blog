@@ -16,11 +16,11 @@
             :class="form"
           >
             <div>
-              <label :class="label_text">{{ $t("username_or_email") }}</label>
+              <label :class="label_text">{{ t("username_or_email") }}</label>
               <input type="text" v-model="email" :class="input_text" />
             </div>
             <div>
-              <label :class="label_text">{{ $t("password") }}</label>
+              <label :class="label_text">{{ t("password") }}</label>
               <input type="password" v-model="password" :class="input_text" />
             </div>
             <div :class="flex">
@@ -35,11 +35,11 @@
                 </div>
                 <div class="ml-3 text-sm">
                   <label :class="label_checkbox" for="remember">{{
-                    $t("remember_me")
+                    t("remember_me")
                   }}</label>
                 </div>
               </div>
-              <button type="submit" :class="button">{{ $t("login") }}</button>
+              <button type="submit" :class="button">{{ t("login") }}</button>
             </div>
           </form>
         </div>

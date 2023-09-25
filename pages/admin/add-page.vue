@@ -68,19 +68,19 @@ const submitForm = async () => {
 </script>
 <template>
   <div class="flex flex-col">
-    <h1 class="text-2xl select-none pb-6">{{ $t("add_page") }}</h1>
+    <h1 class="text-2xl select-none pb-6">{{ t("add_page") }}</h1>
     <form @submit.prevent="submitForm">
       <div class="flex flex-col space-y-5">
         <div class="flex justify-between">
-          <label :class="label">{{ $t("name") }} (URL):</label>
+          <label :class="label">{{ t("name") }} (URL):</label>
           <input v-model="newPage.name" required :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("title") }}:</label>
+          <label :class="label">{{ t("title") }}:</label>
           <input v-model="newPage.title" required :class="input" type="text" />
         </div>
         <div class="flex justify-between">
-          <label :class="label">{{ $t("content") }}:</label>
+          <label :class="label">{{ t("content") }}:</label>
           <textarea
             v-model="newPage.content"
             required
@@ -89,7 +89,7 @@ const submitForm = async () => {
           ></textarea>
         </div>
       </div>
-      <button type="submit" :class="button">{{ $t("add") }}</button>
+      <button type="submit" :class="button">{{ t("add") }}</button>
     </form>
   </div>
 </template>
