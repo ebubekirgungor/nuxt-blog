@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   try {
     if (session) {
       for (var i = 0; i < body.length; i++) {
-        await options.updateMany(
+        await options.updateOne(
           { name: body[i].option },
           {
             value: body[i].value,

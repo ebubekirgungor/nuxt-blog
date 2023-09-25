@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useToast } from "vue-toastification";
+import { useTitle } from "@vueuse/core";
 const { t, locale } = useI18n();
 const toast = useToast();
 
@@ -82,9 +83,7 @@ const submitForm = async () => {
       blog_title.value.value = updatedBlog.value.value;
       currentlang.value.value = updatedLang.value;
       button_disabled.value = true;
-      useHead({
-        title: t("settings"),
-      });
+      useTitle(t("settings"));
       break;
     case "ERROR":
       toast.warning(t("ERROR"));
