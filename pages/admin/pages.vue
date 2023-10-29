@@ -19,11 +19,11 @@ interface Page {
 }
 
 let pages: Page | any = ref({});
-const { data: pagesdata } = await useFetch<Array<Page>>("/api/posts?type=page");
+const { data: pagesdata } = await useFetch<Page[]>("/api/posts?type=page");
 pages.value = pagesdata.value as Page[];
 
 const getPages = async () => {
-  const { data: getdata } = await useFetch<Array<Page>>("/api/posts?type=page");
+  const { data: getdata } = await useFetch<Page[]>("/api/posts?type=page");
   pages.value = getdata.value as Page[];
 };
 
