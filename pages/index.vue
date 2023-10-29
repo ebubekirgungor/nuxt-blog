@@ -11,7 +11,7 @@ interface Post {
   publishDate: { y: number; m: number; d: number };
 }
 
-const { data: posts } = await useFetch<Array<Post>>("/api/posts?type=post");
+const { data: posts } = await useFetch<Post[]>("/api/posts?type=post");
 </script>
 <template>
   <div>
