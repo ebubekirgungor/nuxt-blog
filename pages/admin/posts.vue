@@ -19,11 +19,11 @@ interface Post {
 }
 
 let posts: Post | any = ref({});
-const { data: postdata } = await useFetch<Array<Post>>("/api/posts?type=post");
+const { data: postdata } = await useFetch<Post[]>("/api/posts?type=post");
 posts.value = postdata.value as Post[];
 
 const getPosts = async () => {
-  const { data: getdata } = await useFetch<Array<Post>>("/api/posts?type=post");
+  const { data: getdata } = await useFetch<Post[]>("/api/posts?type=post");
   posts.value = getdata.value as Post[];
 };
 
