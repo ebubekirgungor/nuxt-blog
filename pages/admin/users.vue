@@ -25,11 +25,11 @@ const { data: currentuser } = await useFetch<string | any>(
 );
 
 let users: User | any = ref({});
-const { data: usersdata } = await useFetch<Array<User>>("/api/users");
+const { data: usersdata } = await useFetch<User[]>("/api/users");
 users.value = usersdata.value as User[];
 
 const getUsers = async () => {
-  const { data: getdata } = await useFetch<Array<User>>("/api/users");
+  const { data: getdata } = await useFetch<User[]>("/api/users");
   users.value = getdata.value as User[];
 };
 
