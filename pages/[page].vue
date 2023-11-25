@@ -17,9 +17,9 @@ useHead({
   title: page.value!.title,
 });
 
-const flex = ref("flex flex-col mt-14 ml-[10%] md:ml-[32%]");
-const title = ref("text-[50px]");
-const content = ref("mt-14 max-w-[650px] text-[17px]");
+const flex = "flex flex-col mt-14 ml-[10%] md:ml-[32%]";
+const title = "text-[50px]";
+const content = "mt-14 max-w-[650px] text-[17px]";
 </script>
 <template>
   <div v-if="page" :class="flex">
