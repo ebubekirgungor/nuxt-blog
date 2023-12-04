@@ -47,27 +47,21 @@ const deletePage = async (name: string) => {
   }
 };
 
-const button = ref(
-  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none"
-);
-const dialog_background = ref(
-  "bg-black/50 inset-x-0 inset-y-0 w-full h-full fixed"
-);
-const dialog = ref(
-  "fixed mt-[16%] z-20 flex flex-col m-auto inset-x-0 inset-y-0 p-6 w-[350px] h-[200px] bg-white rounded-xl shadow-xl"
-);
-const dialog_text = ref("text-2xl text-center grow select-none pb-6");
-const dialog_buttons = ref("flex justify-end space-x-2");
-const add_button = ref(
-  "transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white"
-);
-const table = ref(
-  "w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500"
-);
-const thead = ref("select-none text-gray-700 bg-gray-50");
-const action_button = ref(
-  "transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer"
-);
+const button = 
+  "transition duration-200 ease-in-out px-5 py-2 mt-7 bg-sky-500 hover:bg-sky-700 rounded-md text-white select-none";
+const dialog_background = 
+  "bg-black/50 inset-x-0 inset-y-0 w-full h-full fixed";
+const dialog = 
+  "fixed mt-[16%] z-20 flex flex-col m-auto inset-x-0 inset-y-0 p-6 w-[350px] h-[200px] bg-white rounded-xl shadow-xl";
+const dialog_text = "text-2xl text-center grow select-none pb-6";
+const dialog_buttons = "flex justify-end space-x-2";
+const add_button = 
+  "transition duration-200 ease-in-out px-6 py-1.5 w-20 h-9 ml-5 bg-sky-500 hover:bg-sky-700 rounded-md text-white";
+const table = 
+  "w-[calc(100vw-19rem)] mr-15 text-left border border-collapse border-0 overflow-hidden bg-white rounded-xl shadow-xl text-gray-500";
+const thead = "select-none text-gray-700 bg-gray-50";
+const action_button = 
+  "transition duration-200 ease-in-out h-[40px] w-[40px] pl-2 pt-1.5 bg-black/10 hover:bg-black/20 rounded-full mr-2 cursor-pointer";
 </script>
 <template>
   <div>
